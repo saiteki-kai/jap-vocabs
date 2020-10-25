@@ -39,16 +39,16 @@ class WordTab extends StatelessWidget {
                 title: item.type == 'kanji' ? 'Writing' : 'Reading',
                 subtitle: item.type == 'kanji'
                     ? Container(
-                      margin: const EdgeInsets.only(top: 8.0),
-                      color: Colors.white,
-                      child: SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: SvgPicture.asset(
+                        margin: const EdgeInsets.only(top: 8.0),
+                        color: Colors.white,
+                        child: SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: SvgPicture.asset(
                             'assets/kanji/${_hex}_frames.svg',
                             height: 64.0,
                           ),
-                      ),
-                    )
+                        ),
+                      )
                     : Text(
                         item.reading,
                         style: TextStyle(fontSize: 16.0),

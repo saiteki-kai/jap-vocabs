@@ -19,10 +19,8 @@ class TypeButton extends StatelessWidget {
         .headline6
         .copyWith(fontSize: 16.0, color: Colors.white54);
 
-    final selectedStyle = Theme.of(context)
-        .textTheme
-        .headline6
-        .copyWith(color: Colors.white);
+    final selectedStyle =
+        Theme.of(context).textTheme.headline6.copyWith(color: Colors.white);
 
     return IconButton(
       icon: Text(text, style: selected ? selectedStyle : unselectedStyle),

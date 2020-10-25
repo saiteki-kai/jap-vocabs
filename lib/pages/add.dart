@@ -285,7 +285,7 @@ class _AddPageState extends State<AddPage> {
                   decoration: decoration,
                   enabled: _type == 'kanji',
                   onSaved: (String value) {
-                    if (value != null && value.isNotEmpty)  {
+                    if (value != null && value.isNotEmpty) {
                       setState(() => _numberOfStrokes = int.parse(value));
                     }
                   },

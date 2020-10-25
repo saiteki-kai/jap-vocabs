@@ -6,6 +6,7 @@ Reducer<ReviewsState> reviewsReducer = combineReducers<ReviewsState>([
   TypedReducer<ReviewsState, LoadedReviewsAction>(_loadReviewsReducer),
 ]);
 
-ReviewsState _loadReviewsReducer(ReviewsState state, LoadedReviewsAction action) {
+ReviewsState _loadReviewsReducer(
+    ReviewsState state, LoadedReviewsAction action) {
   return state.copyWith(reviews: action.reviews);
 }

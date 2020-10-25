@@ -28,7 +28,8 @@ class _ReviewPageState extends State<ReviewPage> {
 
   final _answers = <Answer>[];
 
-  Future<void> _onNext(BuildContext context, Item item, Review review, int total) async {
+  Future<void> _onNext(
+      BuildContext context, Item item, Review review, int total) async {
     final store = StoreProvider.of<AppState>(context);
 
     final r = SM2.newIteration(review, _quality);

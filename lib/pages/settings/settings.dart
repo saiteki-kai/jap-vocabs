@@ -5,7 +5,6 @@ import 'package:jap_vocab/pages/settings/layout_section.dart';
 import 'package:jap_vocab/pages/settings/notification_section.dart';
 
 class SettingsPage extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return CustomLayout(

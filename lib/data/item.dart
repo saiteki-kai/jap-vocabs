@@ -42,9 +42,8 @@ class Item {
       'type': type,
       'jlpt': jlpt,
       'favorite': favorite,
-      'examples': examples == null
-          ? []
-          : examples.map((e) => e.toMap()).toList(),
+      'examples':
+          examples == null ? [] : examples.map((e) => e.toMap()).toList(),
       'reviewId1': reviewId1,
       'reviewId2': reviewId2,
     };

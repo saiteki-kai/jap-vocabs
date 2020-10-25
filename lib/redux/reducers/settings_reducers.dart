@@ -13,13 +13,11 @@ SettingsState _changeLayout(SettingsState state, ChangeLayoutAction action) {
   return state.copyWith(altLayout: action.value);
 }
 
-SettingsState _changeReviewTime(
-    SettingsState state, ChangeTimeAction action) {
+SettingsState _changeReviewTime(SettingsState state, ChangeTimeAction action) {
   return state.copyWith(review: state.review.copyWith(time: action.time));
 }
 
-SettingsState _changeReviewDay(
-    SettingsState state, ChangeDayAction action) {
+SettingsState _changeReviewDay(SettingsState state, ChangeDayAction action) {
   return state.copyWith(review: state.review.copyWith(days: action.days));
 }
 

@@ -28,7 +28,7 @@ class ListItem extends StatelessWidget {
   }
 
   String get _date => Date.format(item.nextReview) ?? 'New';
-  
+
   String get _example {
     if ((item?.examples?.length ?? 0) > 0) {
       return item.examples.first?.text;
