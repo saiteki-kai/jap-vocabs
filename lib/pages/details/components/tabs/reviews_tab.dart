@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:jap_vocab/data/item.dart';
+import 'package:jap_vocab/models/item.dart';
 import 'package:jap_vocab/pages/details/components/review_info.dart';
 
 class ReviewsTab extends StatelessWidget {

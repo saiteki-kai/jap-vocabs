@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
-import 'package:jap_vocab/data/example.dart';
+import 'package:jap_vocab/models/example.dart';
 import 'package:jap_vocab/redux/thunk/items.dart';
 import 'package:jap_vocab/redux/state/app_state.dart';
 import 'package:uuid/uuid.dart';

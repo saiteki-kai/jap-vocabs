@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:jap_vocab/data/review.dart';
+import 'package:jap_vocab/models/review.dart';
 import 'package:jap_vocab/utils/sm2.dart';
 
 void main() {

@@ -1,7 +1,7 @@
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
-import 'package:jap_vocab/data/review.dart';
+import 'package:jap_vocab/models/review.dart';
 import 'package:jap_vocab/redux/state/app_state.dart';
 import 'package:jap_vocab/redux/thunk/reviews.dart';
 import 'package:redux/redux.dart';

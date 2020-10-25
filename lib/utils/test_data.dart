@@ -1,5 +1,5 @@
-import 'package:jap_vocab/data/item.dart';
-import 'package:jap_vocab/data/review.dart';
+import 'package:jap_vocab/models/item.dart';
+import 'package:jap_vocab/models/review.dart';
 import 'package:jap_vocab/database/item_dao.dart';
 import 'package:jap_vocab/database/review_dao.dart';
 import 'package:uuid/uuid.dart';

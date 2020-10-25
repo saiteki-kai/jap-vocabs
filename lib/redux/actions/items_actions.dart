@@ -1,4 +1,4 @@
-import 'package:jap_vocab/data/item.dart';
+import 'package:jap_vocab/models/item.dart';
 
 class LoadingItemsAction {}
 

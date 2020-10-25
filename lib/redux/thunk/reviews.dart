@@ -1,4 +1,4 @@
-import 'package:jap_vocab/data/review.dart';
+import 'package:jap_vocab/models/review.dart';
 import 'package:jap_vocab/database/review_dao.dart';
 import 'package:jap_vocab/redux/actions/reviews_actions.dart';
 import 'package:jap_vocab/redux/state/app_state.dart';

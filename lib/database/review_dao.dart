@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:jap_vocab/data/review.dart';
+import 'package:jap_vocab/models/review.dart';
 import 'package:jap_vocab/database/app_database.dart';
 import 'package:sembast/sembast.dart';
 import 'package:sembast/timestamp.dart';

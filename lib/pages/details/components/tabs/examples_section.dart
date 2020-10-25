@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:jap_vocab/data/item.dart';
-import 'package:jap_vocab/data/example.dart';
+import 'package:jap_vocab/models/item.dart';
+import 'package:jap_vocab/models/example.dart';
 import 'package:substring_highlight/substring_highlight.dart';
 
 class ExamplesSection extends StatelessWidget {

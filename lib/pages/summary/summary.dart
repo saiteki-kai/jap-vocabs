@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:jap_vocab/components/custom_layout.dart';
-import 'package:jap_vocab/data/answer.dart';
+import 'package:jap_vocab/models/answer.dart';
 import 'package:jap_vocab/pages/summary/components/list_item.dart';
 import 'package:jap_vocab/pages/summary/components/summary_appbar.dart';
 import 'package:jap_vocab/redux/state/app_state.dart';

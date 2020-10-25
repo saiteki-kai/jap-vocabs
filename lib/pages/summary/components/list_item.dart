@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:jap_vocab/data/answer.dart';
+import 'package:jap_vocab/models/answer.dart';
 import 'package:jap_vocab/utils/date.dart';
 
 class ListItem extends StatelessWidget {

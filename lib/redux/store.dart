@@ -8,21 +8,21 @@ import 'package:redux_thunk/redux_thunk.dart';
 Future<Store<AppState>> createStore() async {
   final persistor = Persistor<AppState>(
     storage: FlutterStorage(),
+    throttleDuration: const Duration(seconds: 2),
     serializer: JsonSerializer<AppState>(AppState.fromJson),
     debug: true,
   );
 
   AppState initialState;
-  try {
-    initialState = await persistor.load();
-  } catch (e) {
-    print(e);
-    initialState = null;
-  }
+
+  await persistor
+      .load()
+      .then((value) => initialState = value)
+      .catchError((error) => print(error));
 
   return Store<AppState>(
     appStateReducer,
     initialState: initialState ?? AppState.initialState(),
-    middleware: [persistor.createMiddleware(), thunkMiddleware],
+    middleware: [thunkMiddleware, persistor.createMiddleware()],
   );
 }

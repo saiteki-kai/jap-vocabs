@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:jap_vocab/data/item.dart';
+import 'package:jap_vocab/models/item.dart';
 import 'package:jap_vocab/pages/details/components/tabs/examples_section.dart';
 
 class WordTab extends StatelessWidget {

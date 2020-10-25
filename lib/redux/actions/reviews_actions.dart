@@ -1,4 +1,4 @@
-import 'package:jap_vocab/data/review.dart';
+import 'package:jap_vocab/models/review.dart';
 
 class LoadingReviewsAction {}
 

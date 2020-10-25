@@ -1,6 +1,6 @@
-import 'package:flutter/cupertino.dart';
-import 'package:jap_vocab/data/example.dart';
-import 'package:jap_vocab/data/review.dart';
+import 'package:flutter/material.dart';
+import 'package:jap_vocab/models/example.dart';
+import 'package:jap_vocab/models/review.dart';
 
 class Item {
   final String id;

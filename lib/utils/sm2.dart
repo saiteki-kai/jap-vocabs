@@ -8,7 +8,7 @@
 // 1 - incorrect response; the correct one remembered
 // 0 - complete blackout.
 
-import 'package:jap_vocab/data/review.dart';
+import 'package:jap_vocab/models/review.dart';
 
 class SM2 {
   static Review newIteration(Review r, int q) {

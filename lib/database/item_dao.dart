@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:flutter/foundation.dart';
-import 'package:jap_vocab/data/item.dart';
+import 'package:jap_vocab/models/item.dart';
 import 'package:jap_vocab/database/app_database.dart';
 import 'package:jap_vocab/database/review_dao.dart';
 import 'package:sembast/sembast.dart';

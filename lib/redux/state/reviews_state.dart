@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:jap_vocab/data/review.dart';
+import 'package:jap_vocab/models/review.dart';
 
 @immutable
 class ReviewsState {

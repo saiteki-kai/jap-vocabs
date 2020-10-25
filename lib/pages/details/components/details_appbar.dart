@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
-import 'package:jap_vocab/data/item.dart';
+import 'package:jap_vocab/models/item.dart';
 import 'package:jap_vocab/pages/details/components/confirm_dialog.dart';
 import 'package:jap_vocab/pages/details/components/md2_indicator.dart';
 import 'package:jap_vocab/redux/state/app_state.dart';

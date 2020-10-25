@@ -1,6 +1,6 @@
-import 'package:flutter/cupertino.dart';
-import 'package:jap_vocab/data/item.dart';
-import 'package:jap_vocab/data/review.dart';
+import 'package:flutter/material.dart';
+import 'package:jap_vocab/models/item.dart';
+import 'package:jap_vocab/models/review.dart';
 
 class Answer {
   final Item item;

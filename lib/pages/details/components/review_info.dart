@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:jap_vocab/data/review.dart';
+import 'package:jap_vocab/models/review.dart';
 import 'package:jap_vocab/utils/date.dart';
 import 'package:jap_vocab/utils/progress_color.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';

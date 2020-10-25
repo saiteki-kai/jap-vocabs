@@ -2,7 +2,7 @@ import 'package:chips_choice/chips_choice.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:jap_vocab/components/custom_layout.dart';
-import 'package:jap_vocab/data/item.dart';
+import 'package:jap_vocab/models/item.dart';
 import 'package:jap_vocab/redux/state/app_state.dart';
 import 'package:jap_vocab/redux/thunk/items.dart';
 

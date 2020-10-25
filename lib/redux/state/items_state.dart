@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:jap_vocab/data/item.dart';
+import 'package:jap_vocab/models/item.dart';
 
 @immutable
 class ItemsState {
