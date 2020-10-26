@@ -12,36 +12,34 @@ class Date {
       return '${date.year}年${date.month}月${date.day}日';
     }
 
-    var diffToday = Date.endOfDay.difference(date);
-    var diffNow = date.difference(DateTime.now());
+    final millis =
+        date.millisecondsSinceEpoch - DateTime.now().millisecondsSinceEpoch;
+        
+    if (millis <= 0) return '今';
 
-    if (diffNow.inMilliseconds <= 0) return '今';
+    final seconds = millis / 1000;
+    final hours = seconds / 3600;
+    final days = seconds / 86400;
+    final months = seconds / 2592000;
+    final years = seconds / 31536000;
 
-    if (diffNow.inDays < 2) {
-      if (diffToday.inHours > 0 && diffToday.inHours <= 24) {
-        return timeFormat;
-      } else {
-        return '明日';
-      }
+    if (hours < 24) {
+      return timeFormat;
+    } else if (hours < 48) {
+      return '明日';
+    } else if (days < 7) {
+      return '${days.round()}日';
+    } else if (days < 30) {
+      return '${(days / 7).round()}週';
+    } else if (days < 365) {
+      return '${months.round()}月';
     }
 
-    if (diffNow.inDays > 1 && diffNow.inDays <= 7) return '${diffNow.inDays}日';
-
-    if (diffNow.inDays > 7 && diffNow.inDays < 30) {
-      return '${(diffNow.inDays / 7).floor()}週';
-    }
-
-    if (diffNow.inDays >= 30 && diffNow.inDays < 364) {
-      return '${(diffNow.inDays / 30).floor()}月';
-    }
-
-    if (diffNow.inDays >= 364) return '${(diffNow.inDays / 364).floor()}年';
-
-    return date.toString();
+    return '${years.round()}年';
   }
 
   static DateTime get endOfDay {
-    var now = DateTime.now();
+    final now = DateTime.now();
     return DateTime(now.year, now.month, now.day, 24, 59, 59);
   }
 }
