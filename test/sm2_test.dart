@@ -5,8 +5,8 @@ import 'package:jap_vocab/models/review.dart';
 import 'package:jap_vocab/utils/sm2.dart';
 
 void main() {
-  group('sm2 algorithm', () {
-    test('iteration', () {
+  group('SM2 Algorithm', () {
+    test('Iteration example check', () {
       final r0 = Review();
       expect(r0.streak, 0);
 
@@ -22,7 +22,7 @@ void main() {
       expect(r1.next == r2.next, false);
     });
 
-    test('next_date test', () {
+    test('NextDate check', () {
       final r0 = Review();
 
       final r1 = SM2.newIteration(r0, 5);
@@ -42,7 +42,7 @@ void main() {
       expect(r5.next.difference(r6.next).inMinutes == 0, false);
     });
 
-    test('streak test', () {
+    test('Streak check', () {
       var oldR = Review();
       for (var i = 0; i < 100; i++) {
         final q = Random().nextInt(6);
