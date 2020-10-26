@@ -13,6 +13,7 @@ void main() {
       jlpt: 3,
       partOfSpeech: 'sostantivo',
     );
+
     test('It must be equal', () {
       final copy = item.copyWith();
       expect(copy == item, true);
@@ -54,6 +55,8 @@ void main() {
           reason: 'numberOfStrokes must be different');
       expect(item.examples == copy.examples, false,
           reason: 'examples must be different');
+
+      expect(copy == item, false, reason: 'The copy must be not equal');
     });
   });
 
