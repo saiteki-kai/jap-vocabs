@@ -35,6 +35,14 @@ class Item {
     this.reviewId2,
   });
 
+  int _checkJLPT(int jlpt) {
+    if (jlpt < 0 || jlpt > 5) {
+      throw RangeError.range(jlpt, 0, 5);
+    }
+    
+    return jlpt;
+  }
+
   Map<String, dynamic> toMap() {
     final map = {
       'id': id,
@@ -106,7 +114,7 @@ class Item {
       type: type ?? this.type,
       reading: reading ?? this.reading,
       meaning: meaning ?? this.meaning,
-      jlpt: jlpt ?? this.jlpt,
+      jlpt: jlpt ?? _checkJLPT(this.jlpt),
       numberOfStrokes: numberOfStrokes ?? this.numberOfStrokes,
       partOfSpeech: partOfSpeech ?? this.partOfSpeech,
       favorite: favorite ?? this.favorite,
@@ -118,9 +126,9 @@ class Item {
 
   DateTime get nextReview {
     if (review1?.next == null && review2?.next == null) return null;
-
-    var r1 = 2147483647;
-    var r2 = 2147483647;
+    
+    var r1 = 8640000000000000; // maxMillisecondsSinceEpoch
+    var r2 = 8640000000000000; // maxMillisecondsSinceEpoch
 
     if (review1?.next != null) r1 = review1.next.millisecondsSinceEpoch;
     if (review2?.next != null) r2 = review2.next.millisecondsSinceEpoch;
