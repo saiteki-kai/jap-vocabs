@@ -37,9 +37,4 @@ class Date {
 
     return '${years.round()}年';
   }
-
-  static DateTime get endOfDay {
-    final now = DateTime.now();
-    return DateTime(now.year, now.month, now.day, 24, 59, 59);
-  }
 }
