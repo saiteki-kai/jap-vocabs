@@ -3,7 +3,7 @@ name: dev
 on:
   push:
     branches:
-    - develop
+      - develop
   workflow_dispatch:
     inputs: 
       comment:

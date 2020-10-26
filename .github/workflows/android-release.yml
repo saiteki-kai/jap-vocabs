@@ -2,11 +2,11 @@ name: release
 on:
   push:
     branches:
-    - master
+      - master
     tags:
       - 'v*'
   workflow_dispatch:
-    inputs: 
+    inputs:
       version:
         description: 'Release Version'
         required: true
