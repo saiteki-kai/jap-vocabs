@@ -5,9 +5,10 @@ on:
     branches:
     - develop
   workflow_dispatch:
-    comment:
-      description: 'Comment'
-      required: false
+    inputs: 
+      comment:
+        description: 'Comment'
+        required: false
 
 jobs:
   build:
