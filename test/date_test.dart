@@ -29,7 +29,7 @@ void main() {
       );
     });
 
-    test('in week days', () {
+    test('in-week days', () {
       for (var d = 2; d < 7; d++) {
         expect(
           Date.format(now.add(Duration(days: d, minutes: 30))),
@@ -39,7 +39,7 @@ void main() {
       }
     });
 
-    test('in month weeks', () {
+    test('in-month weeks', () {
       for (var w = 1; w < 4; w++) {
         expect(
           Date.format(now.add(Duration(days: w * 7, minutes: 30))),
@@ -49,7 +49,7 @@ void main() {
       }
     });
 
-    test('in year months', () {
+    test('in-year months', () {
       for (var m = 1; m < 12; m++) {
         expect(
           Date.format(now.add(Duration(days: m * 30, minutes: 30))),
