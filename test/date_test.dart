@@ -5,6 +5,22 @@ void main() {
   group('format', () {
     final now = DateTime.now();
 
+    test('date and time', () {
+      final date = DateTime(now.year, now.month, now.day, 14, 30);
+
+      expect(
+        Date.format(date, full: true),
+        '${date.year}年${date.month}月${date.day}日',
+        reason: 'It must be ${date.year}/${date.month}/${date.day}',
+      );
+
+      expect(
+        Date.format(date, full: true, time: true),
+        '${date.year}年${date.month}月${date.day}日 14時30分',
+        reason: 'It must be ${date.year}/${date.month}/${date.day} 14:30',
+      );
+    });
+
     test('today', () {
       final date = DateTime(now.year, now.month, now.day, 7);
 
