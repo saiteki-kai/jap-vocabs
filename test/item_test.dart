@@ -1,4 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:jap_vocab/models/example.dart';
 import 'package:jap_vocab/models/item.dart';
 import 'package:jap_vocab/models/review.dart';
 import 'package:uuid/uuid.dart';
@@ -133,6 +134,99 @@ void main() {
       item.review2 = r2;
 
       expect(item.nextReview == r2.next, true);
+    });
+  });
+
+  group('toMap', () {
+    final item = Item(
+      text: '溶岩',
+      meaning: 'lava',
+      type: 'word',
+      reading: 'ようがん',
+      jlpt: 3,
+      partOfSpeech: 'sostantivo',
+    );
+
+    test('example', () {
+      final item1 = item.toMap();
+      final item2 = item.copyWith(examples: []).toMap();
+      final item3 = item.copyWith(examples: [Example(), Example()]).toMap();
+
+      expect(item1['examples'], []);
+      expect(item2['examples'], isInstanceOf<List<Map<String, dynamic>>>());
+      expect(item3['examples'], isInstanceOf<List<Map<String, dynamic>>>());
+    });
+
+    test('empty fields', () {
+      final item1 = Item(
+        text: '水',
+        meaning: 'acqua',
+        type: 'word',
+      ).toMap();
+
+      final item2 = Item(
+        text: '水',
+        meaning: 'acqua',
+        type: 'word',
+        reading: 'mizu',
+        favorite: true,
+        partOfSpeech: 'sostantivo',
+        jlpt: 3,
+        numberOfStrokes: 12,
+      ).toMap();
+
+      final fieldsToCheck = [
+        'reading',
+        'part_of_speech',
+        'favorite',
+        'jlpt',
+        'number_of_strokes',
+      ];
+
+      for (var i = 0; i < fieldsToCheck.length; i++) {
+        expect(
+          item1.containsKey(fieldsToCheck[i]),
+          false,
+          reason: 'Field \'${fieldsToCheck[i]}\' must be absent',
+        );
+        expect(
+          item2.containsKey(fieldsToCheck[i]),
+          true,
+          reason: 'Field \'${fieldsToCheck[i]}\' must be present',
+        );
+      }
+    });
+  });
+
+  group('fromMap', () {
+    test('examples argument', () {
+      final item1 = Item.fromMap({
+        'examples': null,
+      });
+      final item2 = Item.fromMap({
+        'examples': <Map<String, dynamic>>[],
+      });
+      final item3 = Item.fromMap({
+        'examples': <Map<String, dynamic>>[{}],
+      });
+
+      expect(
+        item1.examples,
+        [],
+        reason: 'It must be an empty list',
+      );
+
+      expect(
+        item2.examples,
+        isInstanceOf<List<Example>>(),
+        reason: 'It must be an instance of List<Example>',
+      );
+
+      expect(
+        item3.examples,
+        isInstanceOf<List<Example>>(),
+        reason: 'It must be an instance of List<Example>',
+      );
     });
   });
 }
