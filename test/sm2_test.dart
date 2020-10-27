@@ -46,14 +46,17 @@ void main() {
       var oldR = Review();
       for (var i = 0; i < 100; i++) {
         final q = Random().nextInt(6);
-        var newR = SM2.newIteration(oldR, q);
+        final newR = SM2.newIteration(oldR, q);
+
+        final newEF = newR.ef.toStringAsPrecision(2);
+        final oldEF = oldR.ef.toStringAsPrecision(2);
 
         if (q == 4) {
-          expect(newR.ef.toStringAsPrecision(2), oldR.ef.toStringAsPrecision(2));
+          expect(newEF, oldEF);
         }
 
         if (q < 3) {
-          expect(newR.ef.toStringAsPrecision(2), oldR.ef.toStringAsPrecision(2));
+          expect(newEF, oldEF);
           expect(newR.streak, 0);
         }
 
