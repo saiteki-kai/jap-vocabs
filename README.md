@@ -1,6 +1,6 @@
 # Jap Vocabs
 
-[![release](https://github.com/Darklod/jap-vocabs/workflows/release/badge.svg?branch=master)](https://github.com/Darklod/jap-vocabs/actions?query=workflow%release)
+[![release](https://github.com/Darklod/jap-vocabs/workflows/release/badge.svg?branch=master)](https://github.com/Darklod/jap-vocabs/actions?query=workflow%3Arelease)
 [![dev](https://github.com/Darklod/jap-vocabs/workflows/dev/badge.svg?branch=develop)](https://github.com/Darklod/jap-vocabs/actions?query=workflow%3Adev)
 [![codecov](https://codecov.io/gh/Darklod/jap-vocabs/branch/develop/graph/badge.svg?token=C4RT80DY1S)](https://codecov.io/gh/Darklod/jap-vocabs)
 [![Flutter version](https://img.shields.io/badge/flutter-v1.22.2-blue?logo=flutter)](https://flutter.dev/docs/development/tools/sdk/releases)
