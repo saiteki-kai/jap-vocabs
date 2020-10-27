@@ -14,7 +14,7 @@ class Date {
 
     final millis =
         date.millisecondsSinceEpoch - DateTime.now().millisecondsSinceEpoch;
-        
+
     if (millis <= 0) return '今';
 
     final seconds = millis / 1000;
