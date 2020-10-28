@@ -6,3 +6,12 @@
 [![Flutter version](https://img.shields.io/badge/flutter-v1.22.2-blue?logo=flutter)](https://flutter.dev/docs/development/tools/sdk/releases)
 [![style: pedantic](https://img.shields.io/badge/style-pedantic-00b4ab.svg)](https://pub.dev/packages/pedantic)
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FDarklod%2Fjap-vocabs.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2FDarklod%2Fjap-vocabs?ref=badge_shield)
+
+### To Do
+- [ ] Notifications
+- [ ] Filter, Sorting
+- [ ] Statistics Page
+- [ ] Remove, Update examples
+- [ ] Automatic Backups
+- [ ] Language localization
+- [ ] Redesign Add/Edit Page
