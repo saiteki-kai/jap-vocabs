@@ -36,7 +36,7 @@ class FilterState {
       search: search ?? this.search,
       jlpt: jlpt ?? this.jlpt,
       level: level ?? this.level,
-      partOfSpeech: partOfSpeech ?? this.level,
+      partOfSpeech: partOfSpeech ?? this.partOfSpeech,
     );
   }
 
