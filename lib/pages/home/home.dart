@@ -55,20 +55,13 @@ class _ViewModel {
 
   factory _ViewModel.create(Store<AppState> store) {
     final _items = store.state.itemsState.items;
-    final _sorted = List<Item>.from(_items)
-      ..sort((a, b) {
-        final dateA = a.nextReview ?? DateTime.now();
-        final dateB = b.nextReview ?? DateTime.now();
-
-        return dateA.compareTo(dateB);
-      });
 
     void _getItems() {
       store.dispatch(getItems());
     }
 
     return _ViewModel(
-      items: _sorted,
+      items: _items,
       getAllItems: _getItems,
     );
   }

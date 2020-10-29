@@ -16,8 +16,15 @@ ThunkAction<AppState> getItems() {
 
     var type = store.state.filterState.type;
     var search = store.state.filterState.search;
+    var sortField = store.state.orderState.field;
+    var sortMode = store.state.orderState.mode;
 
-    final items = await ItemDao().getAllItems(type: type, search: search);
+    final items = await ItemDao().getAllItems(
+      type: type,
+      search: search,
+      sortField: sortField,
+      sortMode: sortMode,
+    );
     await store.dispatch(LoadedItemsAction(items));
   };
 }

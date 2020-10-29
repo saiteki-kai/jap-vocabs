@@ -121,6 +121,34 @@ class Item {
     );
   }
 
+  // Compute total accuracy
+  double get accuracy {
+    if (review1 == null && review2 == null) return 0.0;
+    if (review1 != null && review2 != null) {
+      return review1.accuracy * review2.accuracy;
+    }
+
+    if (review1 != null) {
+      return review1.accuracy;
+    } else {
+      return review2.accuracy;
+    }
+  }
+
+  // Compute mean streak
+  double get streak {
+    if (review1 == null && review2 == null) return 0.0;
+    if (review1 != null && review2 != null) {
+      return review1.streak * review2.streak * 0.5;
+    }
+
+    if (review1 != null) {
+      return review1.streak.toDouble();
+    } else {
+      return review2.streak.toDouble();
+    }
+  }
+
   DateTime get nextReview {
     if (review1?.next == null && review2?.next == null) return null;
 
@@ -145,4 +173,20 @@ class Item {
 
   @override
   int get hashCode => id.hashCode ^ text.hashCode ^ type.hashCode;
+
+  static Comparator<Item> comparator(String field, String mode) {
+    final mult = mode == 'ASC' ? -1 : 1;
+
+    switch(field) {
+      case 'Alphabetical':
+        return (a, b) => a.text.compareTo(b.text) * mult;
+      case 'Streak':
+        return (a, b) => a.streak.compareTo(b.streak) * mult;
+      case 'Accuracy':
+        return (a, b) => a.accuracy.compareTo(b.accuracy) * mult;
+      case 'Next Review':
+      default:
+        return (a, b) => a.nextReview.compareTo(b.nextReview) * mult;
+    }
+  } 
 }

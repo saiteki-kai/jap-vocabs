@@ -54,8 +54,6 @@ class _ReviewPageState extends State<ReviewPage> {
 
   bool get _enable => _quality != -1;
 
-  // TODO: tasto ? per info sulla qualità
-
   void _showHelp() {
     showDialog(
       context: context,

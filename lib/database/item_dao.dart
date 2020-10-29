@@ -34,7 +34,11 @@ class ItemDao {
     await _store.delete(await _db, finder: finder);
   }
 
-  Future<List<Item>> getAllItems({@required String type, String search}) async {
+  Future<List<Item>> getAllItems(
+      {@required String type,
+      String search,
+      String sortField,
+      String sortMode}) async {
     var finder = Finder(filter: Filter.equals('type', type));
 
     if (search != null && search.isNotEmpty) {
@@ -56,13 +60,16 @@ class ItemDao {
     final recordSnapshot = await _store.find(await _db, finder: finder);
 
     if (recordSnapshot != null) {
-      return Future.wait(recordSnapshot.map((snapshot) async {
+      final list = recordSnapshot.map((snapshot) async {
         final item = Item.fromMap(snapshot.value);
         item.review1 = await ReviewDao().getReviewById(item.reviewId1);
         item.review2 = await ReviewDao().getReviewById(item.reviewId2);
 
         return item;
-      }).toList());
+      }).toList();
+
+      final sorted = await Future.wait(list);
+      return sorted..sort(Item.comparator(sortField, sortMode));
     }
     return null;
   }
