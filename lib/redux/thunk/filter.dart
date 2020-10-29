@@ -12,3 +12,27 @@ ThunkAction<AppState> changeType(String type) {
     await store.dispatch(getReviews());
   };
 }
+
+ThunkAction<AppState> changeJLPT(List<int> jlpt) {
+  return (Store<AppState> store) async {
+    await store.dispatch(ChangeJLTPAction(jlpt));
+    await store.dispatch(getItems());
+    await store.dispatch(getReviews());
+  };
+}
+
+ThunkAction<AppState> changeLevel(List<int> level) {
+  return (Store<AppState> store) async {
+    await store.dispatch(ChangeLevelAction(level));
+    await store.dispatch(getItems());
+    await store.dispatch(getReviews());
+  };
+}
+
+ThunkAction<AppState> changePartOfSpeech(List<String> partOfSpeech) {
+  return (Store<AppState> store) async {
+    await store.dispatch(ChangePartOfSpeechAction(partOfSpeech));
+    await store.dispatch(getItems());
+    await store.dispatch(getReviews());
+  };
+}
