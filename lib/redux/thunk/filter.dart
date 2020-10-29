@@ -21,7 +21,7 @@ ThunkAction<AppState> changeJLPT(List<int> jlpt) {
   };
 }
 
-ThunkAction<AppState> changeLevel(List<int> level) {
+ThunkAction<AppState> changeLevel(List<String> level) {
   return (Store<AppState> store) async {
     await store.dispatch(ChangeLevelAction(level));
     await store.dispatch(getItems());

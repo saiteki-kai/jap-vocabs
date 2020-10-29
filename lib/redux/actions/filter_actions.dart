@@ -14,7 +14,7 @@ class ChangeJLTPAction {
 }
 
 class ChangeLevelAction {
-  final List<int> level;
+  final List<String> level;
   const ChangeLevelAction(this.level);
 }
 

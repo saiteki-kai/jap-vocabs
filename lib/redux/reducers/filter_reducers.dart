@@ -19,16 +19,16 @@ FilterState _changeType(FilterState state, ChangeTypeAction action) {
 }
 
 FilterState _changeJLPT(FilterState state, ChangeJLTPAction action) {
-  return state.copyWith(type: action.jlpt);
+  return state.copyWith(jlpt: action.jlpt);
 }
 
 FilterState _changeLevel(FilterState state, ChangeLevelAction action) {
-  return state.copyWith(type: action.level);
+  return state.copyWith(level: action.level);
 }
 
 FilterState _changePartOfSpeech(
   FilterState state,
   ChangePartOfSpeechAction action,
 ) {
-  return state.copyWith(type: action.partOfSpeech);
+  return state.copyWith(partOfSpeech: action.partOfSpeech);
 }

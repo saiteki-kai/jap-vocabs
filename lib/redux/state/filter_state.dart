@@ -6,7 +6,7 @@ class FilterState {
   final String search;
 
   final List<int> jlpt;
-  final List<int> level;
+  final List<String> level;
   final List<String> partOfSpeech;
 
   const FilterState({
@@ -24,7 +24,13 @@ class FilterState {
         level = null,
         partOfSpeech = null;
 
-  FilterState copyWith({type, search, jlpt, level, partOfSpeech}) {
+  FilterState copyWith({
+    String type,
+    String search,
+    List<int> jlpt,
+    List<String> level,
+    List<String> partOfSpeech,
+  }) {
     return FilterState(
       type: type ?? this.type,
       search: search ?? this.search,
