@@ -9,7 +9,8 @@
 
 ### To Do
 - [ ] Notifications
-- [ ] Filter, Sorting
+- [x] Sorting
+- [ ] Filter
 - [ ] Statistics Page
 - [ ] Remove, Update examples
 - [ ] Automatic Backups
