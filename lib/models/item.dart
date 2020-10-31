@@ -77,7 +77,7 @@ class Item {
       id: map['id'],
       text: map['text'],
       type: map['type'],
-      favorite: map['favorite'],
+      favorite: map['favorite'] ?? false,
       reading: map['reading'],
       meaning: map['meaning'],
       examples: map['examples'] == null
@@ -139,7 +139,7 @@ class Item {
   double get streak {
     if (review1 == null && review2 == null) return 0.0;
     if (review1 != null && review2 != null) {
-      return review1.streak * review2.streak * 0.5;
+      return (review1.streak + review2.streak) * 0.5;
     }
 
     if (review1 != null) {
@@ -177,7 +177,7 @@ class Item {
   static Comparator<Item> comparator(String field, String mode) {
     final mult = mode == 'ASC' ? -1 : 1;
 
-    switch(field) {
+    switch (field) {
       case 'Alphabetical':
         return (a, b) => a.text.compareTo(b.text) * mult;
       case 'Streak':
@@ -186,7 +186,11 @@ class Item {
         return (a, b) => a.accuracy.compareTo(b.accuracy) * mult;
       case 'Next Review':
       default:
-        return (a, b) => a.nextReview.compareTo(b.nextReview) * mult;
+        return (a, b) {
+          final dateA = a.nextReview ?? DateTime.now();
+          final dateB = b.nextReview ?? DateTime.now();
+          return dateA.compareTo(dateB) * mult;
+        };
     }
-  } 
+  }
 }
