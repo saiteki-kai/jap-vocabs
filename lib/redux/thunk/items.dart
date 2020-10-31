@@ -14,10 +14,10 @@ ThunkAction<AppState> getItems() {
   return (Store<AppState> store) async {
     await store.dispatch(LoadingItemsAction());
 
-    var type = store.state.filterState.type;
-    var search = store.state.filterState.search;
+    var filter = store.state.filterState;
+    var order = store.state.orderState;
 
-    final items = await ItemDao().getAllItems(type: type, search: search);
+    final items = await ItemDao().getAllItems(filter: filter, order: order);
     await store.dispatch(LoadedItemsAction(items));
   };
 }

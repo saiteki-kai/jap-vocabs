@@ -16,11 +16,8 @@ class HomePage extends StatelessWidget {
       appBar: HomeAppBar(),
       body: StoreConnector(
         converter: (Store<AppState> store) => _ViewModel.create(store),
-        onInit: (Store<AppState> store) =>
-            store.dispatch(getItems()), // TODO: CHECK
+        onInit: (Store<AppState> store) => store.dispatch(getItems()),
         builder: (context, _ViewModel vm) {
-          print('HomePage build) ${vm.items.length}');
-
           return ListView.builder(
             padding: const EdgeInsets.only(bottom: 80),
             itemCount: vm.items?.length ?? 0,
@@ -55,20 +52,13 @@ class _ViewModel {
 
   factory _ViewModel.create(Store<AppState> store) {
     final _items = store.state.itemsState.items;
-    final _sorted = List<Item>.from(_items)
-      ..sort((a, b) {
-        final dateA = a.nextReview ?? DateTime.now();
-        final dateB = b.nextReview ?? DateTime.now();
-
-        return dateA.compareTo(dateB);
-      });
 
     void _getItems() {
       store.dispatch(getItems());
     }
 
     return _ViewModel(
-      items: _sorted,
+      items: _items,
       getAllItems: _getItems,
     );
   }

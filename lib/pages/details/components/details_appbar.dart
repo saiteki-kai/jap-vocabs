@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:jap_vocab/models/item.dart';
 import 'package:jap_vocab/pages/details/components/confirm_dialog.dart';
-import 'package:jap_vocab/pages/details/components/md2_indicator.dart';
+import 'package:jap_vocab/components/md2_indicator.dart';
 import 'package:jap_vocab/redux/state/app_state.dart';
 import 'package:jap_vocab/redux/thunk/items.dart';
 import 'package:redux/redux.dart';

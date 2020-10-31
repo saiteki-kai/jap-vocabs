@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
-import 'package:jap_vocab/redux/actions/filter_actions.dart';
 import 'package:jap_vocab/redux/state/app_state.dart';
-import 'package:jap_vocab/redux/thunk/items.dart';
+import 'package:jap_vocab/redux/thunk/filter.dart';
 import 'package:redux/redux.dart';
 
 class SearchBar extends StatefulWidget with PreferredSizeWidget {
@@ -90,13 +89,12 @@ class _ViewModel {
   _ViewModel({this.setSearch, this.resetSearch});
 
   factory _ViewModel.create(Store<AppState> store) {
-    void _setSearch(String value) async {
-      await store.dispatch(ChangeSearchAction(value));
-      await store.dispatch(getItems());
+    void _setSearch(String value) {
+      store.dispatch(changeSearch(value));
     }
 
-    void _resetSearch() async {
-      await _setSearch('');
+    void _resetSearch() {
+      _setSearch('');
     }
 
     return _ViewModel(

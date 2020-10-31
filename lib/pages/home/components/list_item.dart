@@ -14,19 +14,6 @@ class ListItem extends StatelessWidget {
 
   const ListItem({this.item, this.onTap});
 
-  double get _percent {
-    if (item.review1 == null && item.review2 == null) return 0.0;
-    if (item.review1 != null && item.review2 != null) {
-      return item.review1.accuracy * item.review2.accuracy;
-    }
-
-    if (item.review1 != null) {
-      return item.review1.accuracy;
-    } else {
-      return item.review2.accuracy;
-    }
-  }
-
   String get _date => Date.format(item.nextReview) ?? 'New';
 
   String get _example {
@@ -87,10 +74,10 @@ class ListItem extends StatelessWidget {
                       CircularPercentIndicator(
                         radius: 40.0,
                         lineWidth: 4.0,
-                        percent: _percent,
+                        percent: item.accuracy,
                         circularStrokeCap: CircularStrokeCap.round,
-                        center: Text('${(_percent * 100).toInt()}'),
-                        progressColor: colorPercent(_percent),
+                        center: Text('${(item.accuracy * 100).toInt()}'),
+                        progressColor: colorPercent(item.accuracy),
                       ),
                     ],
                   ),

@@ -35,30 +35,19 @@ class Item {
     this.reviewId2,
   });
 
-  int _checkJLPT(int jlpt) {
-    if (jlpt < 0 || jlpt > 5) {
-      throw RangeError.range(jlpt, 0, 5);
-    }
-    
-    return jlpt;
-  }
-
   Map<String, dynamic> toMap() {
     final map = {
       'id': id,
       'text': text,
       'type': type,
-      'jlpt': jlpt,
-      'favorite': favorite,
+      'meaning': meaning,
       'examples':
           examples == null ? [] : examples.map((e) => e.toMap()).toList(),
       'reviewId1': reviewId1,
       'reviewId2': reviewId2,
     };
 
-    if (meaning != null && meaning.isNotEmpty) {
-      map['meaning'] = meaning;
-    }
+    // Don't persist empty fields that are not required
 
     if (reading != null && reading.isNotEmpty) {
       map['reading'] = reading;
@@ -68,7 +57,15 @@ class Item {
       map['part_of_speech'] = partOfSpeech;
     }
 
-    if (numberOfStrokes != null) {
+    if (favorite) {
+      map['favorite'] = favorite;
+    }
+
+    if (jlpt != null && jlpt > 0) {
+      map['jlpt'] = jlpt;
+    }
+
+    if (numberOfStrokes != null && numberOfStrokes > 0) {
       map['number_of_strokes'] = numberOfStrokes;
     }
 
@@ -80,7 +77,7 @@ class Item {
       id: map['id'],
       text: map['text'],
       type: map['type'],
-      favorite: map['favorite'],
+      favorite: map['favorite'] ?? false,
       reading: map['reading'],
       meaning: map['meaning'],
       examples: map['examples'] == null
@@ -114,7 +111,7 @@ class Item {
       type: type ?? this.type,
       reading: reading ?? this.reading,
       meaning: meaning ?? this.meaning,
-      jlpt: jlpt ?? _checkJLPT(this.jlpt),
+      jlpt: jlpt ?? this.jlpt,
       numberOfStrokes: numberOfStrokes ?? this.numberOfStrokes,
       partOfSpeech: partOfSpeech ?? this.partOfSpeech,
       favorite: favorite ?? this.favorite,
@@ -124,9 +121,37 @@ class Item {
     );
   }
 
+  // Compute total accuracy
+  double get accuracy {
+    if (review1 == null && review2 == null) return 0.0;
+    if (review1 != null && review2 != null) {
+      return review1.accuracy * review2.accuracy;
+    }
+
+    if (review1 != null) {
+      return review1.accuracy;
+    } else {
+      return review2.accuracy;
+    }
+  }
+
+  // Compute mean streak
+  double get streak {
+    if (review1 == null && review2 == null) return 0.0;
+    if (review1 != null && review2 != null) {
+      return (review1.streak + review2.streak) * 0.5;
+    }
+
+    if (review1 != null) {
+      return review1.streak.toDouble();
+    } else {
+      return review2.streak.toDouble();
+    }
+  }
+
   DateTime get nextReview {
     if (review1?.next == null && review2?.next == null) return null;
-    
+
     var r1 = 8640000000000000; // maxMillisecondsSinceEpoch
     var r2 = 8640000000000000; // maxMillisecondsSinceEpoch
 
@@ -148,4 +173,24 @@ class Item {
 
   @override
   int get hashCode => id.hashCode ^ text.hashCode ^ type.hashCode;
+
+  static Comparator<Item> comparator(String field, String mode) {
+    final mult = mode == 'ASC' ? -1 : 1;
+
+    switch (field) {
+      case 'Alphabetical':
+        return (a, b) => a.text.compareTo(b.text) * mult;
+      case 'Streak':
+        return (a, b) => a.streak.compareTo(b.streak) * mult;
+      case 'Accuracy':
+        return (a, b) => a.accuracy.compareTo(b.accuracy) * mult;
+      case 'Next Review':
+      default:
+        return (a, b) {
+          final dateA = a.nextReview ?? DateTime.now();
+          final dateB = b.nextReview ?? DateTime.now();
+          return dateA.compareTo(dateB) * mult;
+        };
+    }
+  }
 }
