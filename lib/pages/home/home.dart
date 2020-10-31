@@ -16,11 +16,8 @@ class HomePage extends StatelessWidget {
       appBar: HomeAppBar(),
       body: StoreConnector(
         converter: (Store<AppState> store) => _ViewModel.create(store),
-        onInit: (Store<AppState> store) =>
-            store.dispatch(getItems()), // TODO: CHECK
+        onInit: (Store<AppState> store) => store.dispatch(getItems()),
         builder: (context, _ViewModel vm) {
-          print('HomePage build) ${vm.items.length}');
-
           return ListView.builder(
             padding: const EdgeInsets.only(bottom: 80),
             itemCount: vm.items?.length ?? 0,
