@@ -10,9 +10,34 @@
 ### To Do
 - [ ] Notifications
 - [x] Sorting
-- [ ] Filter
+- [x] Filter
 - [ ] Statistics Page
 - [ ] Remove, Update examples
 - [ ] Automatic Backups
 - [ ] Language localization
 - [ ] Redesign Add/Edit Page
+
+### Folder Structure
+ 
+```
+lib
+├── components                # Common widgets shared between pages
+├── database                  # Database configuration and Dao classes
+├── models                    # Models
+├── pages                     # Page widgets
+│   ├─ home                   
+│   │  ├── components         # Local widgets used only in the home page
+│   │  └── home.dart          
+│   ├─ details
+│   └─ ...
+├── redux                     # Redux folders
+│   ├─ actions                
+│   ├─ reducers               
+│   ├─ state                  
+│   ├─ thunk                  
+│   └─ store.dart
+├── utils                     # Common functions
+├── main.dart
+└── routes.dart               # Contains the routes and imports all pages.
+```
+

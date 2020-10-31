@@ -1,8 +1,9 @@
 import 'dart:async';
-import 'package:flutter/foundation.dart';
 import 'package:jap_vocab/models/item.dart';
 import 'package:jap_vocab/database/app_database.dart';
 import 'package:jap_vocab/database/review_dao.dart';
+import 'package:jap_vocab/redux/state/filter_state.dart';
+import 'package:jap_vocab/redux/state/order_state.dart';
 import 'package:sembast/sembast.dart';
 
 class ItemDao {
@@ -34,33 +35,44 @@ class ItemDao {
     await _store.delete(await _db, finder: finder);
   }
 
-  Future<List<Item>> getAllItems(
-      {@required String type,
-      String search,
-      String sortField,
-      String sortMode}) async {
-    var finder = Finder(filter: Filter.equals('type', type));
+  Future<List<Item>> getAllItems({FilterState filter, OrderState order}) async {
+    var filters = [Filter.equals('type', filter.type)];
 
-    if (search != null && search.isNotEmpty) {
-      finder = Finder(
-        filter: Filter.and(
+    if (filter.search != null && filter.search.isNotEmpty) {
+      filters.add(
+        Filter.or(
           [
-            Filter.equals('type', type),
-            Filter.or(
-              [
-                Filter.matches('text', search),
-                Filter.matches('reading', search)
-              ],
-            ),
+            Filter.matches('text', filter.search),
+            Filter.matches('reading', filter.search),
           ],
         ),
       );
     }
 
-    final recordSnapshot = await _store.find(await _db, finder: finder);
+    if (filter.jlpt != null && filter.jlpt.isNotEmpty) {
+      filters.add(Filter.inList('jlpt', filter.jlpt));
+    }
+
+    if (filter.type == 'word' &&
+        filter.partOfSpeech != null &&
+        filter.partOfSpeech.isNotEmpty) {
+      filters.add(Filter.custom((record) {
+        for (var i = 0; i < filter.partOfSpeech.length; i++) {
+          if (record.value['part_of_speech'].contains(filter.partOfSpeech[i])) {
+            return true;
+          }
+        }
+        return false;
+      }));
+    }
+
+    final recordSnapshot = await _store.find(
+      await _db,
+      finder: Finder(filter: Filter.and(filters)),
+    );
 
     if (recordSnapshot != null) {
-      final list = recordSnapshot.map((snapshot) async {
+      final futureList = recordSnapshot.map((snapshot) async {
         final item = Item.fromMap(snapshot.value);
         item.review1 = await ReviewDao().getReviewById(item.reviewId1);
         item.review2 = await ReviewDao().getReviewById(item.reviewId2);
@@ -68,8 +80,23 @@ class ItemDao {
         return item;
       }).toList();
 
-      final sorted = await Future.wait(list);
-      return sorted..sort(Item.comparator(sortField, sortMode));
+      var list = await Future.wait(futureList);
+
+      if (list == null || list.isEmpty) return [];
+
+      if (filter.level != null && filter.level.isNotEmpty) {
+        list = list.where((Item item) {
+          if (item.streak >= 6.0 && filter.level.contains('strong')) {
+            return true;
+          } else if (item.streak >= 4.0 && filter.level.contains('medium')) {
+            return true;
+          } else {
+            return filter.level.contains('weak');
+          }
+        }).toList();
+      }
+
+      return list..sort(Item.comparator(order.field, order.mode));
     }
     return null;
   }
