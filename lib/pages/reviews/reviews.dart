@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:jap_vocab/components/custom_layout.dart';
+import 'package:jap_vocab/generated/l10n.dart';
 import 'package:jap_vocab/models/answer.dart';
 import 'package:jap_vocab/models/item.dart';
 import 'package:jap_vocab/models/review.dart';
+import 'package:jap_vocab/utils/review_utils.dart';
 import 'package:jap_vocab/utils/sm2.dart';
 import 'package:jap_vocab/pages/reviews/components/reviews_appbar.dart';
 import 'package:jap_vocab/database/item_dao.dart';
@@ -21,6 +23,7 @@ class ReviewPage extends StatefulWidget {
   _ReviewPageState createState() => _ReviewPageState();
 }
 
+// TODO: Refactoring
 class _ReviewPageState extends State<ReviewPage> {
   var _show = false;
   var _index = 0;
@@ -134,7 +137,7 @@ class _ReviewPageState extends State<ReviewPage> {
                             ),
                             SizedBox(height: 16.0),
                             Text(
-                              review.reviewType.toUpperCase(),
+                              reviewType(context, review.reviewType).toUpperCase(),
                               style: TextStyle(fontWeight: FontWeight.bold),
                             ),
                             SizedBox(height: 32.0),
@@ -143,7 +146,7 @@ class _ReviewPageState extends State<ReviewPage> {
                               child: InkWell(
                                 child: Container(
                                   padding: const EdgeInsets.all(16.0),
-                                  child: Text('SHOW'),
+                                  child: Text(S.of(context).button_show),
                                 ),
                                 onTap: () {
                                   setState(() => _show = !_show);
@@ -223,7 +226,9 @@ class _ReviewPageState extends State<ReviewPage> {
                         width: width * 0.6,
                         child: RaisedButton(
                           child: Text(
-                            _index == total - 1 ? '要約' : '次',
+                            _index == total - 1
+                                ? S.of(context).tooltip_summary
+                                : S.of(context).button_next,
                             style: TextStyle(fontSize: 18.0),
                           ),
                           shape: RoundedRectangleBorder(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:jap_vocab/generated/l10n.dart';
 import 'package:jap_vocab/models/item.dart';
 import 'package:jap_vocab/pages/details/components/tabs/examples_section.dart';
 
@@ -36,7 +37,9 @@ class WordTab extends StatelessWidget {
                 ],
               ),
               ItemInfo(
-                title: item.type == 'kanji' ? 'Writing' : 'Reading',
+                title: item.type == 'kanji'
+                    ? S.of(context).item_writing
+                    : S.of(context).item_reading,
                 subtitle: item.type == 'kanji'
                     ? Container(
                         margin: const EdgeInsets.only(top: 8.0),
@@ -55,17 +58,17 @@ class WordTab extends StatelessWidget {
                       ),
               ),
               ItemInfo(
-                title: 'Meaning',
+                title: S.of(context).item_meaning,
                 subtitle: item.meaning,
               ),
               if (_isWord)
                 ItemInfo(
-                  title: 'Part of Speech',
+                  title: S.of(context).item_partofspeech,
                   subtitle: item.partOfSpeech ?? '-',
                 )
               else
                 ItemInfo(
-                  title: 'Strokes',
+                  title: S.of(context).item_numberofstrokes,
                   subtitle: item.numberOfStrokes?.toString() ?? '-',
                 ),
             ],
@@ -96,10 +99,7 @@ class ItemInfo extends StatelessWidget {
         SizedBox(height: 12.0),
         Text(title, style: _subtitle),
         if (subtitle is String)
-          Text(
-            subtitle,
-            style: TextStyle(fontSize: 16.0),
-          )
+          Text(subtitle, style: TextStyle(fontSize: 16.0))
         else
           subtitle,
       ],

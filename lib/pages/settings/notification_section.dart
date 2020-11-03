@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_redux/flutter_redux.dart';
+import 'package:jap_vocab/generated/l10n.dart';
 import 'package:jap_vocab/redux/actions/settings_actions.dart';
 import 'package:jap_vocab/redux/state/app_state.dart';
 import 'package:jap_vocab/redux/state/settings_state.dart';
@@ -25,7 +26,7 @@ class NotificationSection extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Text(
-                  'Notifications',
+                  S.of(context).settings_notifications,
                   style: Theme.of(context).textTheme.subtitle2.copyWith(
                         fontWeight: FontWeight.bold,
                         color: Color(0xffff7e65),

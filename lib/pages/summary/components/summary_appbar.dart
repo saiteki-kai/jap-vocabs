@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jap_vocab/generated/l10n.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
 class SummaryAppBar extends StatelessWidget {
@@ -12,7 +13,7 @@ class SummaryAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: Text('要約'),
+      title: Text(S.of(context).tooltip_summary),
       titleSpacing: 0.0,
       bottom: PreferredSize(
         preferredSize: Size.fromHeight(100.0),
@@ -25,7 +26,7 @@ class SummaryAppBar extends StatelessWidget {
             children: [
               Expanded(
                 child: Text(
-                  '合計\n$count',
+                  '${S.of(context).summary_total}\n$count',
                   style: TextStyle(fontSize: 20, color: Colors.white),
                   textAlign: TextAlign.center,
                 ),
@@ -40,7 +41,7 @@ class SummaryAppBar extends StatelessWidget {
               ),
               Expanded(
                 child: Text(
-                  '精度\n${(accuracy * 100).round()}%',
+                  '${S.of(context).accuracy}\n${(accuracy * 100).round()}%',
                   style: TextStyle(fontSize: 20, color: Colors.white),
                   textAlign: TextAlign.center,
                 ),

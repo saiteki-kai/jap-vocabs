@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:jap_vocab/generated/l10n.dart';
 import 'package:jap_vocab/models/review.dart';
 import 'package:jap_vocab/utils/date.dart';
 import 'package:jap_vocab/utils/progress_color.dart';
+import 'package:jap_vocab/utils/review_utils.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
 class ReviewInfo extends StatelessWidget {
@@ -17,7 +19,7 @@ class ReviewInfo extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: Text(
-              '${review.reviewType.toUpperCase()}',
+              reviewType(context, review.reviewType).toUpperCase(),
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 18.0,
@@ -28,10 +30,22 @@ class ReviewInfo extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Stat(title: 'Easiness', value: review.ef.toStringAsPrecision(3)),
-              Stat(title: 'Streak', value: review.streak.toString()),
-              Stat(title: 'Correct', value: review.timesCorrect.toString()),
-              Stat(title: 'Incorrect', value: review.timesIncorrect.toString()),
+              Stat(
+                title: S.of(context).details_reviews_ef,
+                value: review.ef.toStringAsPrecision(3),
+              ),
+              Stat(
+                title: S.of(context).item_streak,
+                value: review.streak.toString(),
+              ),
+              Stat(
+                title: S.of(context).item_correct,
+                value: review.timesCorrect.toString(),
+              ),
+              Stat(
+                title: S.of(context).item_incorrect,
+                value: review.timesIncorrect.toString(),
+              ),
             ],
           ),
           SizedBox(height: 8.0),
@@ -39,7 +53,7 @@ class ReviewInfo extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Stat(
-                title: 'Next Review',
+                title: S.of(context).item_nextreview,
                 value: Date.format(review.next, full: true) ?? '-',
               ),
               CircularPercentIndicator(

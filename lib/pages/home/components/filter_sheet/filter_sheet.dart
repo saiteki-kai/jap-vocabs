@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jap_vocab/components/md2_indicator.dart';
+import 'package:jap_vocab/generated/l10n.dart';
 import 'package:jap_vocab/pages/home/components/filter_sheet/components/filter_section.dart';
 import 'package:jap_vocab/pages/home/components/filter_sheet/components/sort_section.dart';
 
@@ -27,8 +28,8 @@ class FilterSheet extends StatelessWidget {
               padding: const EdgeInsets.only(top: 4),
               child: TabBar(
                 tabs: [
-                  Tab(text: '並べ替え'),
-                  Tab(text: 'フィルター'),
+                  Tab(text: S.of(context).sort),
+                  Tab(text: S.of(context).filter),
                 ],
                 unselectedLabelColor: Colors.white30,
                 labelColor: Colors.white,

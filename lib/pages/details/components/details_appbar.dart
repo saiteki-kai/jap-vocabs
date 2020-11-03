@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
+import 'package:jap_vocab/generated/l10n.dart';
 import 'package:jap_vocab/models/item.dart';
 import 'package:jap_vocab/pages/details/components/confirm_dialog.dart';
 import 'package:jap_vocab/components/md2_indicator.dart';
@@ -38,14 +39,14 @@ class DetailsAppBar extends StatelessWidget {
                 item.favorite ? Icons.favorite : Icons.favorite_border,
                 color: item.favorite ? Colors.white : null,
               ),
-              tooltip: 'Favorite',
+              tooltip: S.of(context).tooltip_favorite,
               onPressed: () async {
                 await store.dispatch(toggleFavoriteItem(item));
               },
             ),
             IconButton(
               icon: Icon(Icons.edit),
-              tooltip: 'Edit',
+              tooltip: S.of(context).tooltip_edit,
               onPressed: () {
                 Navigator.pushNamed(context, '/edit',
                     arguments: {'item': item});
@@ -53,7 +54,7 @@ class DetailsAppBar extends StatelessWidget {
             ),
             IconButton(
               icon: Icon(Icons.restore),
-              tooltip: 'Reset',
+              tooltip: S.of(context).tooltip_reset,
               onPressed: () {
                 showConfirmDialog(
                   context,
@@ -67,7 +68,7 @@ class DetailsAppBar extends StatelessWidget {
             ),
             IconButton(
               icon: Icon(Icons.delete),
-              tooltip: 'Delete',
+              tooltip: S.of(context).tooltip_delete,
               onPressed: () {
                 showConfirmDialog(
                   context,

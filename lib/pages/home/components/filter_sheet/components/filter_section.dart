@@ -1,6 +1,7 @@
 import 'package:chips_choice/chips_choice.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
+import 'package:jap_vocab/generated/l10n.dart';
 import 'package:jap_vocab/redux/state/app_state.dart';
 import 'package:jap_vocab/redux/thunk/filter.dart';
 import 'package:redux/redux.dart';
@@ -46,7 +47,7 @@ class FilterSection extends StatelessWidget {
                 padding: EdgeInsets.zero,
                 isWrapped: true,
               ),
-              Text('Level', style: _style),
+              Text(S.of(context).item_level, style: _style),
               ChipsChoice<String>.multiple(
                 value: vm.level,
                 options: [
@@ -59,22 +60,42 @@ class FilterSection extends StatelessWidget {
                 padding: EdgeInsets.zero,
                 isWrapped: true,
               ),
-              Text('Part Of Speech', style: _style),
+              Text(S.of(context).item_partofspeech, style: _style),
               ChipsChoice<String>.multiple(
                 value: vm.partOfSpeech,
                 options: [
-                  ChipsChoiceOption(value: 'avverbio', label: 'avverbio'),
                   ChipsChoiceOption(
-                      value: 'aggettivo-no', label: 'aggettivo-no'),
+                    value: 'avverbio',
+                    label: 'avverbio',
+                  ),
                   ChipsChoiceOption(
-                      value: 'aggettivo-na', label: 'aggettivo-na'),
-                  ChipsChoiceOption(value: 'verbo', label: 'verbo'),
+                    value: 'aggettivo-no',
+                    label: 'aggettivo-no',
+                  ),
                   ChipsChoiceOption(
-                      value: 'verbo-transitivo', label: 'verbo transitivo'),
+                    value: 'aggettivo-na',
+                    label: 'aggettivo-na',
+                  ),
                   ChipsChoiceOption(
-                      value: 'verbo-intransitivo', label: 'verbo intransitivo'),
-                  ChipsChoiceOption(value: 'verbo-suru', label: 'verbo suru'),
-                  ChipsChoiceOption(value: 'sostantivo', label: 'sostantivo'),
+                    value: 'verbo',
+                    label: 'verbo',
+                  ),
+                  ChipsChoiceOption(
+                    value: 'verbo-transitivo',
+                    label: 'verbo transitivo',
+                  ),
+                  ChipsChoiceOption(
+                    value: 'verbo-intransitivo',
+                    label: 'verbo intransitivo',
+                  ),
+                  ChipsChoiceOption(
+                    value: 'verbo-suru',
+                    label: 'verbo suru',
+                  ),
+                  ChipsChoiceOption(
+                    value: 'sostantivo',
+                    label: 'sostantivo',
+                  ),
                 ],
                 onChanged: (value) => vm.setPartOfSpeech(value),
                 itemConfig: _chipConfig,

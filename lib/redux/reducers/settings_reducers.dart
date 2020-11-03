@@ -7,6 +7,7 @@ Reducer<SettingsState> settingsReducer = combineReducers<SettingsState>([
   TypedReducer<SettingsState, ChangeTimeAction>(_changeReviewTime),
   TypedReducer<SettingsState, ChangeDayAction>(_changeReviewDay),
   TypedReducer<SettingsState, EnableRemainderAction>(_enableReviewRemainder),
+  TypedReducer<SettingsState, SetLocaleAction>(_setLocale),
 ]);
 
 SettingsState _changeLayout(SettingsState state, ChangeLayoutAction action) {
@@ -24,4 +25,8 @@ SettingsState _changeReviewDay(SettingsState state, ChangeDayAction action) {
 SettingsState _enableReviewRemainder(
     SettingsState state, EnableRemainderAction action) {
   return state.copyWith(review: state.review.copyWith(enabled: action.value));
+}
+
+SettingsState _setLocale(SettingsState state, SetLocaleAction action) {
+  return state.copyWith(languageCode: action.languageCode);
 }

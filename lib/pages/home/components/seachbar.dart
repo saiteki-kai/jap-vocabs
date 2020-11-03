@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
+import 'package:jap_vocab/generated/l10n.dart';
 import 'package:jap_vocab/redux/state/app_state.dart';
 import 'package:jap_vocab/redux/thunk/filter.dart';
 import 'package:redux/redux.dart';
@@ -49,7 +50,9 @@ class _SearchBarState extends State<SearchBar> {
             textInputAction: TextInputAction.search,
             autofocus: false,
             style: TextStyle(
-                color: Colors.white, textBaseline: TextBaseline.ideographic),
+              color: Colors.white,
+              textBaseline: TextBaseline.ideographic,
+            ),
             cursorRadius: const Radius.circular(8.0),
             decoration: InputDecoration(
               isCollapsed: true,
@@ -57,7 +60,7 @@ class _SearchBarState extends State<SearchBar> {
               fillColor: Colors.black.withOpacity(0.1),
               prefixIcon: Icon(Icons.search, color: Colors.white70),
               prefixIconConstraints: BoxConstraints.tight(Size(48.0, 40.0)),
-              hintText: '探索',
+              hintText: S.of(context).search_placeholder,
               hintStyle: TextStyle(
                   color: Colors.white70,
                   textBaseline: TextBaseline.ideographic),

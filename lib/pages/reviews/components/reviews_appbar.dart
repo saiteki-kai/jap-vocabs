@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jap_vocab/generated/l10n.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
 class ReviewAppBar extends StatelessWidget {
@@ -13,12 +14,13 @@ class ReviewAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: Text('復習'),
+      title: Text(S.of(context).reviews),
       titleSpacing: 0.0,
       actions: [
         IconButton(
           icon: Icon(Icons.pie_chart),
           onPressed: onSummary,
+          tooltip: S.of(context).tooltip_summary,
         ),
       ],
       bottom: PreferredSize(

@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:jap_vocab/generated/l10n.dart';
 import 'package:jap_vocab/pages/home/components/filter_sheet/filter_sheet.dart';
 import 'package:jap_vocab/pages/home/components/reivew_type_switch.dart';
 import 'package:jap_vocab/pages/home/components/seachbar.dart';
 
 class HomeAppBar extends StatelessWidget {
-  final _choices = {'favorites': 'お気に入り', 'stats': '統計', 'settings': '設定'};
-
   void _onChoiceAction(BuildContext context, String choice) {
     Navigator.pushNamed(context, '/$choice');
   }
@@ -42,23 +41,30 @@ class HomeAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _choices = {
+      'favorites': S.of(context).menu_favorite,
+      'stats': S.of(context).menu_statistics,
+      'settings': S.of(context).menu_settings,
+    };
+
     return AppBar(
       title: ReviewTypeSwitch(),
       actions: [
         IconButton(
           icon: Icon(Icons.add),
-          tooltip: 'Add',
+          tooltip: S.of(context).tooltip_add,
           onPressed: () => _onAdd(context),
         ),
         IconButton(
           icon: Icon(Icons.filter_list),
-          tooltip: 'Filter',
+          tooltip: S.of(context).tooltip_filter,
           onPressed: () => _displayBottomSheet(context),
         ),
         PopupMenuButton<String>(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(8.0)),
           ),
+          tooltip: S.of(context).tooltip_menu,
           onSelected: (choice) => _onChoiceAction(context, choice),
           offset: Offset(0.0, 10.0),
           itemBuilder: (BuildContext context) {

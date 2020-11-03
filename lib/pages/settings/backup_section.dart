@@ -1,6 +1,7 @@
 import 'package:file_picker_writable/file_picker_writable.dart';
 import 'package:flutter/material.dart';
 import 'package:jap_vocab/database/app_database.dart';
+import 'package:jap_vocab/generated/l10n.dart';
 import 'package:jap_vocab/utils/date.dart';
 import 'package:jap_vocab/pages/details/components/confirm_dialog.dart';
 import 'package:path/path.dart';
@@ -83,7 +84,7 @@ class BackupSection extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(16.0),
           child: Text(
-            'Backup',
+            S.of(context).settings_backup,
             style: Theme.of(context).textTheme.subtitle2.copyWith(
                   fontWeight: FontWeight.bold,
                   color: Color(0xffff7e65),
@@ -91,20 +92,20 @@ class BackupSection extends StatelessWidget {
           ),
         ),
         ListTile(
-          title: Text('Create Backup'),
-          subtitle: Text('Create a backup of reviews'),
+          title: Text(S.of(context).settings_createbackup),
+          subtitle: Text(S.of(context).settings_createbackup_descr),
           onTap: _createBackup,
         ),
         ListTile(
-          title: Text('Restore Backup'),
-          subtitle: Text('Restore reviews from a backup file'),
+          title: Text(S.of(context).settings_restorebackup),
+          subtitle: Text(S.of(context).settings_restorebackup_descr),
           onTap: () => _restoreBackup(context),
         ),
         Divider(height: 0),
         Padding(
           padding: const EdgeInsets.all(16.0),
           child: Text(
-            'Automatic Backups',
+            S.of(context).settings_automaticbackups,
             style: TextStyle(
               fontWeight: FontWeight.bold,
               color: Color(0xffff7e65),
@@ -112,11 +113,11 @@ class BackupSection extends StatelessWidget {
           ),
         ),
         ListTile(
-          title: Text('Backup frequency'),
+          title: Text(S.of(context).settings_backupfreq),
           subtitle: Text('Everyday'),
         ),
         ListTile(
-          title: Text('Backup location'),
+          title: Text(S.of(context).settings_backuplocation),
           subtitle: FutureBuilder<String>(
             future: _backupPath,
             builder: (context, snapshot) => Text(snapshot?.data ?? ''),

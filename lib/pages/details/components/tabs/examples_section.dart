@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jap_vocab/generated/l10n.dart';
 import 'package:jap_vocab/models/item.dart';
 import 'package:jap_vocab/models/example.dart';
 import 'package:substring_highlight/substring_highlight.dart';
@@ -17,7 +18,7 @@ class ExamplesSection extends StatelessWidget {
         ? Container(
             child: Center(
               child: Text(
-                'No Examples Inserted Yet',
+                S.of(context).examples_empty,
                 textAlign: TextAlign.center,
                 style: Theme.of(context).textTheme.subtitle1,
               ),

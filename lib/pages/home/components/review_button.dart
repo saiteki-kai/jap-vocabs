@@ -1,6 +1,7 @@
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
+import 'package:jap_vocab/generated/l10n.dart';
 import 'package:jap_vocab/models/review.dart';
 import 'package:jap_vocab/redux/state/app_state.dart';
 import 'package:jap_vocab/redux/thunk/reviews.dart';
@@ -34,7 +35,7 @@ class ReviewButton extends StatelessWidget {
                 ? () => _onPressed(context, vm.reviews)
                 : null,
             label: Text(
-              '復習',
+              S.of(context).reviews,
               style: Theme.of(context)
                   .textTheme
                   .button

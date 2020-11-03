@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:jap_vocab/components/custom_layout.dart';
+import 'package:jap_vocab/generated/l10n.dart';
 import 'package:jap_vocab/models/item.dart';
 import 'package:jap_vocab/pages/home/components/list_item.dart';
 import 'package:jap_vocab/redux/state/app_state.dart';
@@ -16,7 +17,7 @@ class FavoritesPage extends StatelessWidget {
       builder: (context, _ViewModel vm) {
         return CustomLayout(
           appBar: AppBar(
-            title: Text('お気に入り'),
+            title: Text(S.of(context).favorites_title),
             titleSpacing: 0.0,
           ),
           body: ListView.builder(

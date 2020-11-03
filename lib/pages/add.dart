@@ -2,6 +2,7 @@ import 'package:chips_choice/chips_choice.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:jap_vocab/components/custom_layout.dart';
+import 'package:jap_vocab/generated/l10n.dart';
 import 'package:jap_vocab/models/item.dart';
 import 'package:jap_vocab/redux/state/app_state.dart';
 import 'package:jap_vocab/redux/thunk/items.dart';
@@ -27,49 +28,7 @@ class _AddPageState extends State<AddPage> {
 
   void _onSave() async {
     final store = StoreProvider.of<AppState>(context);
-
-    //    List<Item> items = [
-//      Item(
-//          text: '学習',
-//          type: 'word',
-//          meaning: 'imparare, studio, tutorial',
-//          reading: 'がくしゅう'),
-//      Item(
-//          text: '機械',
-//          type: 'word',
-//          meaning: 'macchina, macchinario',
-//          reading: 'きかい'),
-//      Item(
-//          text: '無口な',
-//          type: 'word',
-//          meaning: 'silenzioso, taciturno',
-//          reading: 'むくちな'),
-//      Item(
-//          text: '植物',
-//          type: 'word',
-//          meaning: 'pianta, vegetale',
-//          reading: 'しょくぶつ'),
-//      Item(
-//          text: '植える',
-//          type: 'word',
-//          meaning: 'piantare, trapiantare, instillare',
-//          reading: 'うえる'),
-//      Item(
-//          text: '探索',
-//          type: 'word',
-//          meaning: 'ricerca, cerca, investigare',
-//          reading: 'たんさく'),
-//      Item(text: '混乱', type: 'word', meaning: 'confusione', reading: 'こんらん'),
-//    ];
-//    for (Item x in items) {
-//      await store.dispatch(addItem(x));
-//    }
-//    return;
-
     final form = _formKey.currentState;
-
-    print(form.validate());
-    print(widget.item == null);
 
     if (form.validate()) {
       form.save();
@@ -134,7 +93,7 @@ class _AddPageState extends State<AddPage> {
       _textController.text = _text;
       _meaningController.text = _meaning;
       _readingController.text = _reading;
-      _strokesController.text = (_numberOfStrokes ?? '').toString();
+      _strokesController.text = _numberOfStrokes?.toString() ?? '';
       _partOfSpeechController.text = _partOfSpeech;
     }
     super.initState();
@@ -157,7 +116,9 @@ class _AddPageState extends State<AddPage> {
     return CustomLayout(
       appBar: AppBar(
         title: Text(
-          widget.item == null ? 'Add' : 'Edit',
+          widget.item == null
+              ? S.of(context).add_title
+              : S.of(context).edit_title,
         ),
         titleSpacing: 0.0,
         actions: [
@@ -176,7 +137,9 @@ class _AddPageState extends State<AddPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 _FieldTitle(
-                    title: 'Text', padding: EdgeInsets.only(bottom: 8.0)),
+                  title: S.of(context).item_text,
+                  padding: EdgeInsets.only(bottom: 8.0),
+                ),
                 TextFormField(
                   controller: _textController,
                   decoration: decoration,
@@ -190,7 +153,7 @@ class _AddPageState extends State<AddPage> {
                     return null;
                   },
                 ),
-                _FieldTitle(title: 'Meaning'),
+                _FieldTitle(title: S.of(context).item_meaning),
                 TextFormField(
                   controller: _meaningController,
                   decoration: decoration,
@@ -205,8 +168,9 @@ class _AddPageState extends State<AddPage> {
                   },
                 ),
                 _FieldTitle(
-                    title: 'JLPT',
-                    padding: EdgeInsets.only(top: 16.0, bottom: 0.0)),
+                  title: 'JLPT',
+                  padding: EdgeInsets.only(top: 16.0, bottom: 0.0),
+                ),
                 ChipsChoice<int>.single(
                   value: _jlpt,
                   isWrapped: true,
@@ -230,8 +194,9 @@ class _AddPageState extends State<AddPage> {
                   },
                 ),
                 _FieldTitle(
-                    title: 'Type',
-                    padding: EdgeInsets.only(top: 16.0, bottom: 0.0)),
+                  title: S.of(context).item_type,
+                  padding: EdgeInsets.only(top: 16.0, bottom: 0.0),
+                ),
                 ChipsChoice<String>.single(
                   value: _type,
                   isWrapped: true,
@@ -244,14 +209,23 @@ class _AddPageState extends State<AddPage> {
                     unselectedColor: Colors.grey.shade400,
                   ),
                   options: [
-                    ChipsChoiceOption(value: 'word', label: '語彙'),
-                    ChipsChoiceOption(value: 'kanji', label: '漢字'),
+                    ChipsChoiceOption(
+                      value: 'word',
+                      label: S.of(context).tab_word,
+                    ),
+                    ChipsChoiceOption(
+                      value: 'kanji',
+                      label: S.of(context).tab_kanji,
+                    ),
                   ],
                   onChanged: (String value) {
                     setState(() => _type = value);
                   },
                 ),
-                _FieldTitle(title: 'Reading', enabled: _type == 'word'),
+                _FieldTitle(
+                  title: S.of(context).item_reading,
+                  enabled: _type == 'word',
+                ),
                 TextFormField(
                   controller: _readingController,
                   decoration: decoration,
@@ -260,7 +234,10 @@ class _AddPageState extends State<AddPage> {
                     setState(() => _reading = value);
                   },
                 ),
-                _FieldTitle(title: 'Part of Speech', enabled: _type == 'word'),
+                _FieldTitle(
+                  title: S.of(context).item_partofspeech,
+                  enabled: _type == 'word',
+                ),
                 TextFormField(
                   controller: _partOfSpeechController,
                   decoration: decoration,
@@ -278,7 +255,9 @@ class _AddPageState extends State<AddPage> {
                   },
                 ),
                 _FieldTitle(
-                    title: 'Number of Strokes', enabled: _type == 'kanji'),
+                  title: S.of(context).item_numberofstrokes,
+                  enabled: _type == 'kanji',
+                ),
                 TextFormField(
                   controller: _strokesController,
                   keyboardType: TextInputType.number,

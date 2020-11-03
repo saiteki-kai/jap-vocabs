@@ -51,19 +51,27 @@ class SettingsState {
   final bool altLayout;
   final String backupPath;
   final Remainder review;
+  final String languageCode;
 
-  const SettingsState({this.altLayout, this.backupPath, this.review});
+  const SettingsState({
+    this.altLayout,
+    this.backupPath,
+    this.review,
+    this.languageCode,
+  });
 
   const SettingsState.initial()
       : altLayout = false,
         backupPath = '',
-        review = const Remainder.initial();
+        review = const Remainder.initial(),
+        languageCode = 'en';
 
-  SettingsState copyWith({altLayout, backupPath, review}) {
+  SettingsState copyWith({altLayout, backupPath, review, languageCode}) {
     return SettingsState(
       altLayout: altLayout ?? this.altLayout,
       backupPath: backupPath ?? this.backupPath,
       review: review ?? this.review,
+      languageCode: languageCode ?? this.languageCode,
     );
   }
 
@@ -74,6 +82,7 @@ class SettingsState {
       altLayout: json['alt_layout'] ?? false,
       backupPath: json['backup_path'] ?? '',
       review: Remainder.fromJson(json['review']) ?? Remainder.initial(),
+      languageCode: json['languageCode'] ?? 'en',
     );
   }
 
@@ -82,6 +91,7 @@ class SettingsState {
       'alt_layout': altLayout,
       'backup_path': backupPath,
       'review': review.toJson(),
+      'languageCode': languageCode,
     };
   }
 }

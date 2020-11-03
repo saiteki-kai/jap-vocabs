@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:jap_vocab/components/custom_layout.dart';
+import 'package:jap_vocab/generated/l10n.dart';
 import 'package:jap_vocab/pages/details/components/details_appbar.dart';
 import 'package:jap_vocab/pages/details/components/phrase_dialog.dart';
 import 'package:jap_vocab/pages/details/components/tabs/item_tab.dart';
@@ -77,8 +78,10 @@ class _DetailsPageState extends State<DetailsPage>
             item: item,
             controller: _tabController,
             tabs: [
-              item.type == 'word' ? '言葉' : '漢字',
-              '復習',
+              item.type == 'word'
+                  ? S.of(context).tab_word
+                  : S.of(context).tab_kanji,
+              S.of(context).tab_review
             ],
             onTabChange: (index) {
               if (_tabController.index == 0) {

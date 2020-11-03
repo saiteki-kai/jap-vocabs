@@ -33,9 +33,6 @@ class HomePage extends StatelessWidget {
                 },
               );
             },
-            /*separatorBuilder: (_, index) {
-              return Divider(height: 0);
-            },*/
           );
         },
       ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
+import 'package:jap_vocab/generated/l10n.dart';
 import 'package:jap_vocab/redux/state/app_state.dart';
 import 'package:jap_vocab/redux/thunk/settings.dart';
 import 'package:redux/redux.dart';
@@ -14,7 +15,7 @@ class LayoutSection extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: Text(
-              'Display',
+              S.of(context).settings_display,
               style: Theme.of(context).textTheme.subtitle2.copyWith(
                     fontWeight: FontWeight.bold,
                     color: Color(0xffff7e65),
@@ -25,8 +26,8 @@ class LayoutSection extends StatelessWidget {
             converter: (Store<AppState> store) => _ViewModel.create(store),
             builder: (context, _ViewModel vm) {
               return ListTile(
-                title: Text('Alternative Layout'),
-                subtitle: Text('Show examples in the home page'),
+                title: Text(S.of(context).settings_altlayout),
+                subtitle: Text(S.of(context).settings_altlayout_descr),
                 trailing: Switch(
                   value: vm.altLayout,
                   onChanged: (value) => vm.changeLayout(value),

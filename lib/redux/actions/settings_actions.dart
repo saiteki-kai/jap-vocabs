@@ -24,3 +24,8 @@ class EnableRemainderAction {
   final bool value;
   const EnableRemainderAction(this.value);
 }
+
+class SetLocaleAction {
+  final String languageCode;
+  const SetLocaleAction(this.languageCode);
+}
