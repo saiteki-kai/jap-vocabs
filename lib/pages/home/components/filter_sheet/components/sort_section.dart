@@ -18,6 +18,7 @@ class SortSection extends StatelessWidget {
     ];
 
     return StoreConnector(
+      distinct: true,
       converter: (Store<AppState> state) => _ViewModel.create(state),
       builder: (context, _ViewModel vm) {
         return Column(

@@ -15,6 +15,7 @@ class HomePage extends StatelessWidget {
     return CustomLayout(
       appBar: HomeAppBar(),
       body: StoreConnector(
+        distinct: true,
         converter: (Store<AppState> store) => _ViewModel.create(store),
         onInit: (Store<AppState> store) => store.dispatch(getItems()),
         builder: (context, _ViewModel vm) {

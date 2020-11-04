@@ -29,6 +29,7 @@ class LanguageSection extends StatelessWidget {
             ),
           ),
           StoreConnector(
+            distinct: true,
             converter: (Store<AppState> store) => _ViewModel.create(store),
             builder: (context, _ViewModel vm) {
               return Padding(

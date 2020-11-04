@@ -12,6 +12,7 @@ class NotificationSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StoreConnector(
+      distinct: true,
       converter: (Store<AppState> store) => _ViewModel.create(store),
       onDidChange: (_ViewModel vm) async {
         await Notifications.instance.reviewNotification(

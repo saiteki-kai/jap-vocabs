@@ -25,6 +25,7 @@ class DetailsAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StoreConnector(
+      distinct: true,
       converter: (Store<AppState> store) => store,
       builder: (context, Store<AppState> store) {
         return AppBar(

@@ -15,6 +15,7 @@ class ReviewButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StoreConnector(
+      distinct: true,
       converter: (Store<AppState> store) => _ViewModel.create(store),
       onInitialBuild: (_ViewModel vm) => vm.getAllReviews(),
       builder: (BuildContext context, _ViewModel vm) {

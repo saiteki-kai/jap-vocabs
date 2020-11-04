@@ -23,6 +23,7 @@ class FilterSection extends StatelessWidget {
 
     // TODO: add select all / deselect all button
     return StoreConnector(
+      distinct: true,
       converter: (Store<AppState> store) => _ViewModel.create(store),
       builder: (context, _ViewModel vm) {
         return Container(

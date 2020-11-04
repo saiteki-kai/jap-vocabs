@@ -32,6 +32,7 @@ class ListItem extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: StoreConnector(
+          distinct: true,
           converter: (Store<AppState> store) => _ViewModel.create(store),
           builder: (context, _ViewModel vm) {
             return Row(

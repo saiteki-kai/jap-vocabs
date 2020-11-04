@@ -9,6 +9,7 @@ class ReviewTypeSwitch extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StoreConnector(
+      distinct: true,
       converter: (Store<AppState> store) => _ViewModel.create(store),
       builder: (context, _ViewModel vm) {
         return Row(
