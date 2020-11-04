@@ -19,16 +19,6 @@ class _PhraseDialogState extends State<PhraseDialog> {
   String _text;
   String _translation;
 
-  final _decoration = const InputDecoration(
-    border: OutlineInputBorder(
-      borderRadius: BorderRadius.all(Radius.circular(8.0)),
-      borderSide: BorderSide.none,
-    ),
-    contentPadding: EdgeInsets.all(8.0),
-    isCollapsed: true,
-    filled: true,
-  );
-
   void _onPressed() async {
     final store = StoreProvider.of<AppState>(context);
     var form = _keyForm.currentState;
@@ -71,7 +61,6 @@ class _PhraseDialogState extends State<PhraseDialog> {
               ),
               SizedBox(height: 8.0),
               TextFormField(
-                decoration: _decoration,
                 maxLines: 2,
                 validator: (String value) {
                   if (value.isEmpty) {
@@ -88,8 +77,6 @@ class _PhraseDialogState extends State<PhraseDialog> {
               ),
               SizedBox(height: 8.0),
               TextFormField(
-                decoration: _decoration,
-                //expands: true,
                 maxLines: 2,
                 validator: (String value) {
                   if (value.isEmpty) {

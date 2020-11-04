@@ -4,6 +4,7 @@ import 'package:flutter_redux/flutter_redux.dart';
 import 'package:jap_vocab/components/custom_layout.dart';
 import 'package:jap_vocab/generated/l10n.dart';
 import 'package:jap_vocab/models/item.dart';
+import 'package:jap_vocab/pages/add/components/field_title.dart';
 import 'package:jap_vocab/redux/state/app_state.dart';
 import 'package:jap_vocab/redux/thunk/items.dart';
 
@@ -101,18 +102,6 @@ class _AddPageState extends State<AddPage> {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: CHECK if ALREADY exists
-
-    final decoration = InputDecoration(
-      filled: true,
-      contentPadding: const EdgeInsets.all(8.0),
-      //isCollapsed: true,
-      border: OutlineInputBorder(
-        borderRadius: BorderRadius.all(Radius.circular(8.0)),
-        borderSide: BorderSide.none,
-      ),
-    );
-
     return CustomLayout(
       appBar: AppBar(
         title: Text(
@@ -136,13 +125,12 @@ class _AddPageState extends State<AddPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                _FieldTitle(
+                FieldTitle(
                   title: S.of(context).item_text,
                   padding: EdgeInsets.only(bottom: 8.0),
                 ),
                 TextFormField(
                   controller: _textController,
-                  decoration: decoration,
                   onSaved: (String value) {
                     setState(() => _text = value);
                   },
@@ -153,10 +141,9 @@ class _AddPageState extends State<AddPage> {
                     return null;
                   },
                 ),
-                _FieldTitle(title: S.of(context).item_meaning),
+                FieldTitle(title: S.of(context).item_meaning),
                 TextFormField(
                   controller: _meaningController,
-                  decoration: decoration,
                   onSaved: (String value) {
                     setState(() => _meaning = value);
                   },
@@ -167,7 +154,7 @@ class _AddPageState extends State<AddPage> {
                     return null;
                   },
                 ),
-                _FieldTitle(
+                FieldTitle(
                   title: 'JLPT',
                   padding: EdgeInsets.only(top: 16.0, bottom: 0.0),
                 ),
@@ -193,7 +180,7 @@ class _AddPageState extends State<AddPage> {
                     setState(() => _jlpt = value);
                   },
                 ),
-                _FieldTitle(
+                FieldTitle(
                   title: S.of(context).item_type,
                   padding: EdgeInsets.only(top: 16.0, bottom: 0.0),
                 ),
@@ -222,25 +209,23 @@ class _AddPageState extends State<AddPage> {
                     setState(() => _type = value);
                   },
                 ),
-                _FieldTitle(
+                FieldTitle(
                   title: S.of(context).item_reading,
                   enabled: _type == 'word',
                 ),
                 TextFormField(
                   controller: _readingController,
-                  decoration: decoration,
                   enabled: _type == 'word',
                   onSaved: (String value) {
                     setState(() => _reading = value);
                   },
                 ),
-                _FieldTitle(
+                FieldTitle(
                   title: S.of(context).item_partofspeech,
                   enabled: _type == 'word',
                 ),
                 TextFormField(
                   controller: _partOfSpeechController,
-                  decoration: decoration,
                   enabled: _type == 'word',
                   onSaved: (String value) {
                     setState(() => _partOfSpeech = value);
@@ -254,14 +239,13 @@ class _AddPageState extends State<AddPage> {
                     return null;
                   },
                 ),
-                _FieldTitle(
+                FieldTitle(
                   title: S.of(context).item_numberofstrokes,
                   enabled: _type == 'kanji',
                 ),
                 TextFormField(
                   controller: _strokesController,
                   keyboardType: TextInputType.number,
-                  decoration: decoration,
                   enabled: _type == 'kanji',
                   onSaved: (String value) {
                     if (value != null && value.isNotEmpty) {
@@ -284,29 +268,6 @@ class _AddPageState extends State<AddPage> {
             ),
           ),
         ),
-      ),
-    );
-  }
-}
-
-class _FieldTitle extends StatelessWidget {
-  final String title;
-  final bool enabled;
-  final EdgeInsets padding;
-
-  const _FieldTitle({Key key, this.title, this.enabled = true, this.padding})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: padding ?? const EdgeInsets.only(bottom: 8.0, top: 20.0),
-      child: Text(
-        title,
-        style: Theme.of(context)
-            .textTheme
-            .subtitle2
-            .copyWith(color: enabled ? null : Colors.black54),
       ),
     );
   }

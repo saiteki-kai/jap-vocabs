@@ -41,6 +41,7 @@ class Item {
       'text': text,
       'type': type,
       'meaning': meaning,
+      'favorite': favorite ?? false,
       'examples':
           examples == null ? [] : examples.map((e) => e.toMap()).toList(),
       'reviewId1': reviewId1,
@@ -55,10 +56,6 @@ class Item {
 
     if (partOfSpeech != null && partOfSpeech.isNotEmpty) {
       map['part_of_speech'] = partOfSpeech;
-    }
-
-    if (favorite) {
-      map['favorite'] = favorite;
     }
 
     if (jlpt != null && jlpt > 0) {

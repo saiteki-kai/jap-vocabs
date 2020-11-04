@@ -69,6 +69,14 @@ class App extends StatelessWidget {
               backgroundColor: Colors.white,
               highlightColor: Colors.white10,
               textTheme: Style.textTheme,
+              inputDecorationTheme: InputDecorationTheme(
+                filled: true,
+                contentPadding: const EdgeInsets.all(8.0),
+                border: const OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                  borderSide: BorderSide.none,
+                ),
+              ),
               visualDensity: VisualDensity.adaptivePlatformDensity,
             ),
             onGenerateRoute: onGenerateRoute,

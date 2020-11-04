@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:jap_vocab/models/answer.dart';
 import 'package:jap_vocab/models/item.dart';
 import 'package:jap_vocab/models/review.dart';
-import 'package:jap_vocab/pages/add.dart';
+import 'package:jap_vocab/pages/add/add.dart';
 import 'package:jap_vocab/pages/details/details.dart';
 import 'package:jap_vocab/pages/favorites/favorites.dart';
 import 'package:jap_vocab/pages/home/home.dart';

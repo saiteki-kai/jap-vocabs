@@ -56,18 +56,13 @@ class _SearchBarState extends State<SearchBar> {
             cursorRadius: const Radius.circular(8.0),
             decoration: InputDecoration(
               isCollapsed: true,
-              filled: true,
               fillColor: Colors.black.withOpacity(0.1),
               prefixIcon: Icon(Icons.search, color: Colors.white70),
               prefixIconConstraints: BoxConstraints.tight(Size(48.0, 40.0)),
               hintText: S.of(context).search_placeholder,
               hintStyle: TextStyle(
-                  color: Colors.white70,
-                  textBaseline: TextBaseline.ideographic),
-              contentPadding: const EdgeInsets.all(8.0),
-              border: const OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(8.0)),
-                borderSide: BorderSide.none,
+                color: Colors.white70,
+                textBaseline: TextBaseline.ideographic,
               ),
             ),
           ),
