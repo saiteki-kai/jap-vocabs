@@ -59,8 +59,8 @@ class DetailsAppBar extends StatelessWidget {
               onPressed: () {
                 showConfirmDialog(
                   context,
-                  message: 'Reset reviews progress for this item?',
-                  buttonText: 'Reset',
+                  message: S.of(context).dialog_reset_msg,
+                  buttonText: S.of(context).button_reset,
                   onConfirm: () async {
                     await store.dispatch(resetItem(item));
                   },
@@ -73,8 +73,8 @@ class DetailsAppBar extends StatelessWidget {
               onPressed: () {
                 showConfirmDialog(
                   context,
-                  message: 'Delete this item?',
-                  buttonText: 'Delete',
+                  message: S.of(context).dialog_delete_msg,
+                  buttonText: S.of(context).button_delete,
                   onConfirm: () async {
                     await store.dispatch(deleteItem(item));
                     Navigator.pop(context);

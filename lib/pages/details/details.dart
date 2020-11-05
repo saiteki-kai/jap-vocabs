@@ -69,7 +69,7 @@ class _DetailsPageState extends State<DetailsPage>
 
         if (item == null) {
           return Material(
-            child: Center(child: Text('探索中...')),
+            child: Center(child: Text(S.of(context).loading)),
           );
         }
 

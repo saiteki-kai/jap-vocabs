@@ -46,16 +46,6 @@ class S {
     );
   }
 
-  /// `Add`
-  String get add_title {
-    return Intl.message(
-      'Add',
-      name: 'add_title',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Alphabetical`
   String get alphabetical {
     return Intl.message(
@@ -86,21 +76,121 @@ class S {
     );
   }
 
-  /// `Easiness`
-  String get details_reviews_ef {
+  /// `Reset`
+  String get button_reset {
     return Intl.message(
-      'Easiness',
-      name: 'details_reviews_ef',
+      'Reset',
+      name: 'button_reset',
       desc: '',
       args: [],
     );
   }
 
-  /// `Edit`
-  String get edit_title {
+  /// `Restore`
+  String get button_restore {
     return Intl.message(
-      'Edit',
-      name: 'edit_title',
+      'Restore',
+      name: 'button_restore',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete`
+  String get button_delete {
+    return Intl.message(
+      'Delete',
+      name: 'button_delete',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancel`
+  String get button_cancel {
+    return Intl.message(
+      'Cancel',
+      name: 'button_cancel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add`
+  String get button_add {
+    return Intl.message(
+      'Add',
+      name: 'button_add',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Confirm`
+  String get button_confirm {
+    return Intl.message(
+      'Confirm',
+      name: 'button_confirm',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Reset reviews progress for this item?`
+  String get dialog_reset_msg {
+    return Intl.message(
+      'Reset reviews progress for this item?',
+      name: 'dialog_reset_msg',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete this item?`
+  String get dialog_delete_msg {
+    return Intl.message(
+      'Delete this item?',
+      name: 'dialog_delete_msg',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Example`
+  String get dialog_example {
+    return Intl.message(
+      'Example',
+      name: 'dialog_example',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Translation`
+  String get dialog_example_translation {
+    return Intl.message(
+      'Translation',
+      name: 'dialog_example_translation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Do you wanna restore from backup?`
+  String get dialog_backup_msg {
+    return Intl.message(
+      'Do you wanna restore from backup?',
+      name: 'dialog_backup_msg',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Easiness`
+  String get details_reviews_ef {
+    return Intl.message(
+      'Easiness',
+      name: 'details_reviews_ef',
       desc: '',
       args: [],
     );
@@ -116,21 +206,41 @@ class S {
     );
   }
 
-  /// `Favorites`
-  String get favorites_title {
+  /// `Add`
+  String get title_add {
     return Intl.message(
-      'Favorites',
-      name: 'favorites_title',
+      'Add',
+      name: 'title_add',
       desc: '',
       args: [],
     );
   }
 
-  /// `Filter`
-  String get filter {
+  /// `Edit`
+  String get title_edit {
     return Intl.message(
-      'Filter',
-      name: 'filter',
+      'Edit',
+      name: 'title_edit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Settings`
+  String get title_settings {
+    return Intl.message(
+      'Settings',
+      name: 'title_settings',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Favorites`
+  String get title_favorites {
+    return Intl.message(
+      'Favorites',
+      name: 'title_favorites',
       desc: '',
       args: [],
     );
@@ -151,6 +261,26 @@ class S {
     return Intl.message(
       'Vocabs',
       name: 'home_vocabs',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Filter`
+  String get tab_filter {
+    return Intl.message(
+      'Filter',
+      name: 'tab_filter',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sort`
+  String get tab_sort {
+    return Intl.message(
+      'Sort',
+      name: 'tab_sort',
       desc: '',
       args: [],
     );
@@ -486,21 +616,31 @@ class S {
     );
   }
 
-  /// `Settings`
-  String get settings_title {
+  /// `Enable`
+  String get settings_notifications_enable {
     return Intl.message(
-      'Settings',
-      name: 'settings_title',
+      'Enable',
+      name: 'settings_notifications_enable',
       desc: '',
       args: [],
     );
   }
 
-  /// `Enable`
-  String get settings_enable {
+  /// `Time`
+  String get settings_notifications_time {
     return Intl.message(
-      'Enable',
-      name: 'settings_enable',
+      'Time',
+      name: 'settings_notifications_time',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Days`
+  String get settings_notifications_days {
+    return Intl.message(
+      'Days',
+      name: 'settings_notifications_days',
       desc: '',
       args: [],
     );
@@ -536,11 +676,51 @@ class S {
     );
   }
 
-  /// `Sort`
-  String get sort {
+  /// `Required`
+  String get validation_required {
     return Intl.message(
-      'Sort',
-      name: 'sort',
+      'Required',
+      name: 'validation_required',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The value must be greater than 0`
+  String get validation_positive {
+    return Intl.message(
+      'The value must be greater than 0',
+      name: 'validation_positive',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No route defined for`
+  String get notfound {
+    return Intl.message(
+      'No route defined for',
+      name: 'notfound',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Loading...`
+  String get loading {
+    return Intl.message(
+      'Loading...',
+      name: 'loading',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `New`
+  String get new_item {
+    return Intl.message(
+      'New',
+      name: 'new_item',
       desc: '',
       args: [],
     );

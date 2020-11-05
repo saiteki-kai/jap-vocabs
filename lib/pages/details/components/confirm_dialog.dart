@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jap_vocab/generated/l10n.dart';
 
 Future<bool> showConfirmDialog(
   context, {
@@ -13,7 +14,7 @@ Future<bool> showConfirmDialog(
       content: Text(message),
       actions: <Widget>[
         FlatButton(
-          child: Text('Cancel'),
+          child: Text(S.of(context).button_cancel),
           onPressed: () {
             Navigator.pop(context, false);
           },

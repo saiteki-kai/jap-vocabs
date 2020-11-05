@@ -11,7 +11,7 @@ class SettingsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomLayout(
       appBar: AppBar(
-        title: Text(S.of(context).settings_title),
+        title: Text(S.of(context).title_settings),
         titleSpacing: 0.0,
       ),
       body: ListView(

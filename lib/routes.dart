@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jap_vocab/generated/l10n.dart';
 import 'package:jap_vocab/models/answer.dart';
 import 'package:jap_vocab/models/item.dart';
 import 'package:jap_vocab/models/review.dart';
@@ -39,7 +40,7 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
         builder: (BuildContext context) {
           return Scaffold(
             body: Center(
-              child: Text('No route defined for ${settings.name}'),
+              child: Text('${S.of(context).notfound} ${settings.name}'),
             ),
           );
         },

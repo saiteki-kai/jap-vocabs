@@ -93,7 +93,7 @@ class _ReviewPageState extends State<ReviewPage> {
 
     if (review == null) {
       return Material(
-        child: Center(child: Text('探索中...')),
+        child: Center(child: Text(S.of(context).loading)),
       );
     }
 
@@ -112,141 +112,138 @@ class _ReviewPageState extends State<ReviewPage> {
       body: Stack(
         alignment: Alignment.topRight,
         children: [
-          Padding(
+          Container(
             padding: const EdgeInsets.all(24.0),
-            child: Center(
-              child: FutureBuilder<Item>(
-                future: ItemDao().getItemById(review.itemId),
-                builder: (context, snapshot) {
-                  if (!snapshot.hasData) return CircularProgressIndicator();
+            alignment: Alignment.topCenter,
+            child: FutureBuilder<Item>(
+              future: ItemDao().getItemById(review.itemId),
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) return CircularProgressIndicator();
 
-                  final item = snapshot.data;
-                  final hex = item.text.codeUnits.first;
+                final item = snapshot.data;
+                final hex = item.text.codeUnits.first;
 
-                  return Column(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Spacer(),
-                      Container(
-                        child: Column(
-                          children: [
-                            Text(
-                              item.text,
-                              style: Theme.of(context).textTheme.headline4,
+                return Column(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Spacer(),
+                    Container(
+                      padding: EdgeInsets.only(top: 64.0),
+                      child: Column(
+                        children: [
+                          Text(
+                            item.text,
+                            style: Theme.of(context).textTheme.headline4,
+                          ),
+                          SizedBox(height: 16.0),
+                          Text(
+                            reviewType(context, review.reviewType)
+                                .toUpperCase(),
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20.0,
                             ),
-                            SizedBox(height: 16.0),
-                            Text(
-                              reviewType(context, review.reviewType).toUpperCase(),
-                              style: TextStyle(fontWeight: FontWeight.bold),
-                            ),
-                            SizedBox(height: 32.0),
-                            Card(
-                              elevation: 2.0,
-                              child: InkWell(
-                                child: Container(
-                                  padding: const EdgeInsets.all(16.0),
-                                  child: Text(S.of(context).button_show),
-                                ),
-                                onTap: () {
-                                  setState(() => _show = !_show);
-                                },
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(8.0)),
+                          ),
+                          SizedBox(height: 32.0),
+                          Card(
+                            elevation: 2.0,
+                            child: InkWell(
+                              child: Container(
+                                padding: const EdgeInsets.all(16.0),
+                                child: Text(S.of(context).button_show),
                               ),
-                              shape: RoundedRectangleBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(8.0)),
+                              onTap: () {
+                                setState(() => _show = !_show);
+                              },
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(8.0),
                               ),
                             ),
-                            SizedBox(height: 32.0),
-                            Container(
-                              height: 200,
-                              child: _show
-                                  ? Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceAround,
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        review.reviewType == 'writing'
-                                            ? SingleChildScrollView(
-                                                child: SvgPicture.asset(
-                                                  'assets/kanji/${hex}_frames.svg',
-                                                  height: 100,
-                                                  fit: BoxFit.fitHeight,
-                                                ),
-                                                scrollDirection:
-                                                    Axis.horizontal,
-                                              )
-                                            : Text(
-                                                review.reviewType == 'meaning'
-                                                    ? item.meaning
-                                                    : item.reading,
-                                                style: Theme.of(context)
-                                                    .textTheme
-                                                    .subtitle1,
-                                              ),
-                                        SizedBox(height: 16.0),
-                                        ChipsChoice<int>.single(
-                                          value: _quality,
-                                          isWrapped: true,
-                                          padding: EdgeInsets.zero,
-                                          itemConfig: ChipsChoiceItemConfig(
-                                            showCheckmark: false,
-                                            selectedBrightness: Brightness.dark,
-                                            unselectedBrightness:
-                                                Brightness.dark,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(8.0),
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: 32.0),
+                          Container(
+                            height: 100,
+                            child: _show
+                                ? Padding(
+                                    padding: EdgeInsets.only(bottom: 16.0),
+                                    child: review.reviewType == 'writing'
+                                        ? SingleChildScrollView(
+                                            child: SvgPicture.asset(
+                                              'assets/kanji/${hex}_frames.svg',
+                                              height: 100,
+                                              fit: BoxFit.fitHeight,
+                                            ),
+                                            scrollDirection: Axis.horizontal,
+                                          )
+                                        : Text(
+                                            review.reviewType == 'meaning'
+                                                ? item.meaning
+                                                : item.reading,
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .subtitle1
+                                                .copyWith(fontSize: 20.0),
                                           ),
-                                          options: [
-                                            ChipsChoiceOption(
-                                                value: 0, label: '0'),
-                                            ChipsChoiceOption(
-                                                value: 1, label: '1'),
-                                            ChipsChoiceOption(
-                                                value: 2, label: '2'),
-                                            ChipsChoiceOption(
-                                                value: 3, label: '3'),
-                                            ChipsChoiceOption(
-                                                value: 4, label: '4'),
-                                            ChipsChoiceOption(
-                                                value: 5, label: '5'),
-                                          ],
-                                          onChanged: (val) =>
-                                              setState(() => _quality = val),
-                                        ),
-                                      ],
-                                    )
-                                  : null,
-                            ),
-                          ],
-                        ),
-                      ),
-                      Spacer(),
-                      Container(
-                        width: width * 0.6,
-                        child: RaisedButton(
-                          child: Text(
-                            _index == total - 1
-                                ? S.of(context).tooltip_summary
-                                : S.of(context).button_next,
-                            style: TextStyle(fontSize: 18.0),
+                                  )
+                                : null,
                           ),
-                          shape: RoundedRectangleBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(8.0)),
-                          ),
-                          padding: const EdgeInsets.symmetric(vertical: 12.0),
-                          color: Theme.of(context).accentColor,
-                          textColor: Colors.white,
-                          onPressed: _enable
-                              ? () => _onNext(context, item, review, total)
-                              : null,
-                        ),
+                        ],
                       ),
-                    ],
-                  );
-                },
-              ),
+                    ),
+                    ChipsChoice<int>.single(
+                      value: _quality,
+                      isWrapped: true,
+                      padding: EdgeInsets.zero,
+                      itemConfig: ChipsChoiceItemConfig(
+                        showCheckmark: false,
+                        selectedBrightness: Brightness.dark,
+                        unselectedBrightness: Brightness.dark,
+                        unselectedColor: _show ? Colors.grey : null,
+                      ),
+                      options: [
+                        ChipsChoiceOption(value: 0, label: '0'),
+                        ChipsChoiceOption(value: 1, label: '1'),
+                        ChipsChoiceOption(value: 2, label: '2'),
+                        ChipsChoiceOption(value: 3, label: '3'),
+                        ChipsChoiceOption(value: 4, label: '4'),
+                        ChipsChoiceOption(value: 5, label: '5'),
+                      ],
+                      onChanged: _show
+                          ? (val) => setState(() => _quality = val)
+                          : (_) => null,
+                    ),
+                    Spacer(),
+                    Container(
+                      width: width * 0.6,
+                      child: RaisedButton(
+                        child: Text(
+                          _index == total - 1
+                              ? S.of(context).tooltip_summary
+                              : S.of(context).button_next,
+                          style: TextStyle(fontSize: 18.0),
+                        ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(8.0),
+                          ),
+                        ),
+                        padding: const EdgeInsets.symmetric(vertical: 12.0),
+                        color: Theme.of(context).accentColor,
+                        textColor: Colors.white,
+                        onPressed: _enable
+                            ? () => _onNext(context, item, review, total)
+                            : null,
+                      ),
+                    ),
+                  ],
+                );
+              },
             ),
           ),
           Padding(

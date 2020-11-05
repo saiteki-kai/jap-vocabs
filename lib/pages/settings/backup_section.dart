@@ -50,10 +50,10 @@ class BackupSection extends StatelessWidget {
 
           return await showConfirmDialog(
             context,
-            message: 'Do you wanna restore from backup?\n'
+            message: '${S.of(context).dialog_backup_msg}\n'
                 '\n${Date.format(date, full: true, time: true)}\n'
                 '\nItems: $itemsCount\nReviews: $reviewsCount',
-            buttonText: 'Restore',
+            buttonText: S.of(context).button_restore,
           );
         });
       }

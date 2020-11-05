@@ -28,8 +28,8 @@ class FilterSheet extends StatelessWidget {
               padding: const EdgeInsets.only(top: 4),
               child: TabBar(
                 tabs: [
-                  Tab(text: S.of(context).sort),
-                  Tab(text: S.of(context).filter),
+                  Tab(text: S.of(context).tab_sort),
+                  Tab(text: S.of(context).tab_filter),
                 ],
                 unselectedLabelColor: Colors.white30,
                 labelColor: Colors.white,

@@ -22,17 +22,28 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function>{
         "accuracy": MessageLookupByLibrary.simpleMessage("Accuratezza"),
-        "add_title": MessageLookupByLibrary.simpleMessage("Aggiungi"),
         "alphabetical": MessageLookupByLibrary.simpleMessage("Alfabetico"),
+        "button_add": MessageLookupByLibrary.simpleMessage("Aggiungi"),
+        "button_cancel": MessageLookupByLibrary.simpleMessage("Annulla"),
+        "button_confirm": MessageLookupByLibrary.simpleMessage("Conferma"),
+        "button_delete": MessageLookupByLibrary.simpleMessage("Elimina"),
         "button_next": MessageLookupByLibrary.simpleMessage("Avanti"),
+        "button_reset": MessageLookupByLibrary.simpleMessage("Resetta"),
+        "button_restore": MessageLookupByLibrary.simpleMessage("Ripristina"),
         "button_show": MessageLookupByLibrary.simpleMessage("Mostra"),
         "details_reviews_ef": MessageLookupByLibrary.simpleMessage("Facilità"),
-        "edit_title": MessageLookupByLibrary.simpleMessage("Modifica"),
+        "dialog_backup_msg": MessageLookupByLibrary.simpleMessage(
+            "Vuoi ripristinare il backup?"),
+        "dialog_delete_msg":
+            MessageLookupByLibrary.simpleMessage("Eliminare questo elemento?"),
+        "dialog_example": MessageLookupByLibrary.simpleMessage("Esempio"),
+        "dialog_example_translation":
+            MessageLookupByLibrary.simpleMessage("Traduzione"),
+        "dialog_reset_msg": MessageLookupByLibrary.simpleMessage(
+            "Vuoi resettare le reviews per questo elemento?"),
         "en": MessageLookupByLibrary.simpleMessage("Inglese"),
         "examples_empty": MessageLookupByLibrary.simpleMessage(
             "Nessun esempio ancora inserito"),
-        "favorites_title": MessageLookupByLibrary.simpleMessage("Preferiti"),
-        "filter": MessageLookupByLibrary.simpleMessage("Filtra"),
         "home_kanji": MessageLookupByLibrary.simpleMessage("Kanji"),
         "home_vocabs": MessageLookupByLibrary.simpleMessage("Vocaboli"),
         "it": MessageLookupByLibrary.simpleMessage("Italiano"),
@@ -52,9 +63,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "item_type": MessageLookupByLibrary.simpleMessage("Tipo"),
         "item_writing": MessageLookupByLibrary.simpleMessage("Scrittura"),
         "ja": MessageLookupByLibrary.simpleMessage("Giapponese"),
+        "loading": MessageLookupByLibrary.simpleMessage("Caricamento..."),
         "menu_favorite": MessageLookupByLibrary.simpleMessage("Preferiti"),
         "menu_settings": MessageLookupByLibrary.simpleMessage("Impostazioni"),
         "menu_statistics": MessageLookupByLibrary.simpleMessage("Statistiche"),
+        "new_item": MessageLookupByLibrary.simpleMessage("Nuovo"),
+        "notfound":
+            MessageLookupByLibrary.simpleMessage("Nessuna route definita per"),
         "reviews": MessageLookupByLibrary.simpleMessage("Revisioni"),
         "search_placeholder": MessageLookupByLibrary.simpleMessage("Cerca"),
         "settings_altlayout":
@@ -73,22 +88,31 @@ class MessageLookup extends MessageLookupByLibrary {
         "settings_createbackup_descr": MessageLookupByLibrary.simpleMessage(
             "Creare una copia di backup delle revisioni"),
         "settings_display": MessageLookupByLibrary.simpleMessage("Display"),
-        "settings_enable": MessageLookupByLibrary.simpleMessage("Abilita"),
         "settings_language": MessageLookupByLibrary.simpleMessage("Lingua"),
         "settings_notifications":
             MessageLookupByLibrary.simpleMessage("Notifiche"),
+        "settings_notifications_days":
+            MessageLookupByLibrary.simpleMessage("Giorni"),
+        "settings_notifications_enable":
+            MessageLookupByLibrary.simpleMessage("Abilita"),
+        "settings_notifications_time":
+            MessageLookupByLibrary.simpleMessage("Ora"),
         "settings_restorebackup":
             MessageLookupByLibrary.simpleMessage("Ripristina Backup"),
         "settings_restorebackup_descr": MessageLookupByLibrary.simpleMessage(
             "Ripristinare le revisioni da un file di backup"),
-        "settings_title": MessageLookupByLibrary.simpleMessage("Impostazioni"),
-        "sort": MessageLookupByLibrary.simpleMessage("Ordina"),
         "summary_correct": MessageLookupByLibrary.simpleMessage("Corretta"),
         "summary_incorrect": MessageLookupByLibrary.simpleMessage("Incorretta"),
         "summary_total": MessageLookupByLibrary.simpleMessage("Totale"),
+        "tab_filter": MessageLookupByLibrary.simpleMessage("Filtra"),
         "tab_kanji": MessageLookupByLibrary.simpleMessage("Kanji"),
         "tab_review": MessageLookupByLibrary.simpleMessage("Revisioni"),
+        "tab_sort": MessageLookupByLibrary.simpleMessage("Ordina"),
         "tab_word": MessageLookupByLibrary.simpleMessage("Parola"),
+        "title_add": MessageLookupByLibrary.simpleMessage("Aggiungi"),
+        "title_edit": MessageLookupByLibrary.simpleMessage("Modifica"),
+        "title_favorites": MessageLookupByLibrary.simpleMessage("Preferiti"),
+        "title_settings": MessageLookupByLibrary.simpleMessage("Impostazioni"),
         "tooltip_add": MessageLookupByLibrary.simpleMessage("Aggiungi"),
         "tooltip_delete": MessageLookupByLibrary.simpleMessage("Elimina"),
         "tooltip_edit": MessageLookupByLibrary.simpleMessage("Modifica"),
@@ -96,6 +120,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "tooltip_filter": MessageLookupByLibrary.simpleMessage("Filtra"),
         "tooltip_menu": MessageLookupByLibrary.simpleMessage("Menu"),
         "tooltip_reset": MessageLookupByLibrary.simpleMessage("Ripristina"),
-        "tooltip_summary": MessageLookupByLibrary.simpleMessage("Sommario")
+        "tooltip_summary": MessageLookupByLibrary.simpleMessage("Sommario"),
+        "validation_positive": MessageLookupByLibrary.simpleMessage(
+            "Il valore deve essere maggiore di zero"),
+        "validation_required": MessageLookupByLibrary.simpleMessage("Richiesto")
       };
 }

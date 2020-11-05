@@ -35,14 +35,14 @@ class NotificationSection extends StatelessWidget {
                 ),
               ),
               ListTile(
-                title: Text('Enable'),
+                title: Text(S.of(context).settings_notifications_enable),
                 trailing: Switch(
                   value: vm.enabled,
                   onChanged: (value) async => await vm.enableRemainder(value),
                 ),
               ),
               ListTile(
-                title: Text('Time'),
+                title: Text(S.of(context).settings_notifications_time),
                 subtitle: Text(
                   '${vm.time.hour.toString().padLeft(2, '0')}:'
                   '${vm.time.minute.toString().padLeft(2, '0')}',
@@ -65,7 +65,7 @@ class NotificationSection extends StatelessWidget {
                 },
               ),
               ListTile(
-                title: Text('Days'),
+                title: Text(S.of(context).settings_notifications_days),
                 subtitle: Text('Everyday'),
                 enabled: vm.enabled,
                 onTap: () {
@@ -136,7 +136,7 @@ class _DaysDialogState extends State<DaysDialog> {
       actions: [
         FlatButton(
           onPressed: () => Navigator.pop(context),
-          child: Text('Cancel'),
+          child: Text(S.of(context).button_cancel),
         ),
         FlatButton(
           onPressed: () {
@@ -146,7 +146,7 @@ class _DaysDialogState extends State<DaysDialog> {
                 .map<Day>((d) => d['key'])
                 .toList(growable: false));
           },
-          child: Text('Confirm'),
+          child: Text(S.of(context).button_confirm),
         ),
       ],
     );

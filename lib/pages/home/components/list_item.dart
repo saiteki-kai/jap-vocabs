@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
+import 'package:jap_vocab/generated/l10n.dart';
 import 'package:jap_vocab/models/item.dart';
 import 'package:jap_vocab/utils/date.dart';
 import 'package:jap_vocab/utils/progress_color.dart';
@@ -14,7 +15,7 @@ class ListItem extends StatelessWidget {
 
   const ListItem({this.item, this.onTap});
 
-  String get _date => Date.format(item.nextReview) ?? 'New';
+  String get _date => Date.format(item.nextReview) ?? S.current.new_item;
 
   String get _example {
     if ((item?.examples?.length ?? 0) > 0) {

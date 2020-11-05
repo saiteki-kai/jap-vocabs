@@ -17,7 +17,7 @@ class FavoritesPage extends StatelessWidget {
       builder: (context, _ViewModel vm) {
         return CustomLayout(
           appBar: AppBar(
-            title: Text(S.of(context).favorites_title),
+            title: Text(S.of(context).title_favorites),
             titleSpacing: 0.0,
           ),
           body: ListView.builder(

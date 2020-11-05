@@ -106,8 +106,8 @@ class _AddPageState extends State<AddPage> {
       appBar: AppBar(
         title: Text(
           widget.item == null
-              ? S.of(context).add_title
-              : S.of(context).edit_title,
+              ? S.of(context).title_add
+              : S.of(context).title_edit,
         ),
         titleSpacing: 0.0,
         actions: [
@@ -136,7 +136,7 @@ class _AddPageState extends State<AddPage> {
                   },
                   validator: (value) {
                     if (value.isEmpty) {
-                      return 'Required';
+                      return S.of(context).validation_required;
                     }
                     return null;
                   },
@@ -149,7 +149,7 @@ class _AddPageState extends State<AddPage> {
                   },
                   validator: (value) {
                     if (value.isEmpty) {
-                      return 'Required';
+                      return S.of(context).validation_required;
                     }
                     return null;
                   },
@@ -234,7 +234,7 @@ class _AddPageState extends State<AddPage> {
                     if (_type != 'word') return null;
 
                     if (value.isEmpty) {
-                      return 'Required';
+                      return S.of(context).validation_required;
                     }
                     return null;
                   },
@@ -256,10 +256,10 @@ class _AddPageState extends State<AddPage> {
                     if (_type != 'kanji') return null;
 
                     if (value.isEmpty) {
-                      return 'Required';
+                      return S.of(context).validation_required;
                     }
                     if (int.parse(value) <= 0) {
-                      return 'The value must be greater than 0';
+                      return S.of(context).validation_positive;
                     }
                     return null;
                   },

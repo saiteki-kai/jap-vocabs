@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
+import 'package:jap_vocab/generated/l10n.dart';
 import 'package:jap_vocab/models/example.dart';
 import 'package:jap_vocab/redux/thunk/items.dart';
 import 'package:jap_vocab/redux/state/app_state.dart';
@@ -56,7 +57,7 @@ class _PhraseDialogState extends State<PhraseDialog> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Phrase',
+                S.of(context).dialog_example,
                 style: Theme.of(context).textTheme.subtitle2,
               ),
               SizedBox(height: 8.0),
@@ -64,7 +65,7 @@ class _PhraseDialogState extends State<PhraseDialog> {
                 maxLines: 2,
                 validator: (String value) {
                   if (value.isEmpty) {
-                    return 'Required';
+                    return S.of(context).validation_required;
                   }
                   return null;
                 },
@@ -72,7 +73,7 @@ class _PhraseDialogState extends State<PhraseDialog> {
               ),
               SizedBox(height: 16.0),
               Text(
-                'Translation',
+                S.of(context).dialog_example_translation,
                 style: Theme.of(context).textTheme.subtitle2,
               ),
               SizedBox(height: 8.0),
@@ -80,7 +81,7 @@ class _PhraseDialogState extends State<PhraseDialog> {
                 maxLines: 2,
                 validator: (String value) {
                   if (value.isEmpty) {
-                    return 'Required';
+                    return S.of(context).validation_required;
                   }
                   return null;
                 },
@@ -92,13 +93,13 @@ class _PhraseDialogState extends State<PhraseDialog> {
       ),
       actions: <Widget>[
         FlatButton(
-          child: Text('Cancel'),
+          child: Text(S.of(context).button_cancel),
           onPressed: () {
             Navigator.pop(context);
           },
         ),
         FlatButton(
-          child: Text('Add'),
+          child: Text(S.of(context).button_add),
           onPressed: _onPressed,
         ),
       ],
