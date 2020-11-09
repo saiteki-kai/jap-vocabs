@@ -178,7 +178,6 @@ void main() {
       final fieldsToCheck = [
         'reading',
         'part_of_speech',
-        'favorite',
         'jlpt',
         'number_of_strokes',
       ];
