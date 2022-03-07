@@ -7,7 +7,18 @@
 [![style: pedantic](https://img.shields.io/badge/style-pedantic-00b4ab.svg)](https://pub.dev/packages/pedantic)
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FDarklod%2Fjap-vocabs.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2FDarklod%2Fjap-vocabs?ref=badge_shield)
 
-### To Do
+## Screenshots
+
+Vocabulary List   |  Sorting |  Filtering 
+:----:|:---:|:--------:
+![](screenshots/Screenshot_2022-03-07-14-26-10-981_com.darklod.jap_vocab.jpg) | ![](screenshots/Screenshot_2022-03-07-14-26-27-894_com.darklod.jap_vocab.jpg) | ![](screenshots/Screenshot_2022-03-07-14-26-33-879_com.darklod.jap_vocab.jpg)
+
+ Review Page | Review Item | Legend | Summary
+:----:|:---:|:--------:|:--------:
+![](screenshots/Screenshot_2022-03-07-14-30-04-172_com.darklod.jap_vocab.jpg) | ![](screenshots/Screenshot_2022-03-07-14-26-49-236_com.darklod.jap_vocab.jpg) | ![](screenshots/Screenshot_2022-03-07-14-26-54-494_com.darklod.jap_vocab.jpg) | ![](screenshots/Screenshot_2022-03-07-14-29-46-418_com.darklod.jap_vocab.jpg) |
+
+## To Do
+
 - [ ] Notifications
 - [x] Sorting
 - [x] Filter
@@ -17,8 +28,8 @@
 - [ ] Language localization
 - [ ] Redesign Add/Edit Page
 
-### Folder Structure
- 
+## Folder Structure
+
 ```
 lib
 ├── components                # Common widgets shared between pages
