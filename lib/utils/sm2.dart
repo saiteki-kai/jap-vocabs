@@ -40,8 +40,12 @@ class SM2 {
 
     if (ef < 1.3) ef = 1.3;
 
-    final last = DateTime.now();
-    final next = DateTime.now().add(Duration(days: interval));
+    // Truncate minutes
+    final now = DateTime.now();
+    final date = DateTime(now.year, now.month, now.day, now.hour);
+
+    final last = date;
+    final next = date.add(Duration(days: interval));
 
     return r.copyWith(
       ef: ef,

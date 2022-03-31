@@ -95,13 +95,16 @@ class Review {
   }
 
   Review reset() {
+    final now = DateTime.now();
+    final date = DateTime(now.year, now.month, now.day, now.hour);
+
     return Review(
       id: id,
       ef: 2.5,
       interval: 0,
       streak: 0,
-      last: null,
-      next: null,
+      next: date,
+      last: date,
       timesIncorrect: 0,
       timesCorrect: 0,
       reviewType: reviewType,

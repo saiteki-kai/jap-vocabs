@@ -5,13 +5,11 @@ import 'package:jap_vocab/redux/state/app_state.dart';
 import 'package:redux/redux.dart';
 import 'package:redux_thunk/redux_thunk.dart';
 
-ThunkAction<AppState> getReviews() {
+ThunkAction<AppState> getReviews({ReviewsFilter filter}) {
   return (Store<AppState> store) async {
     await store.dispatch(LoadingReviewsAction());
 
-    var type = store.state.filterState.type;
-
-    final reviews = await ReviewDao().getAllReviews(type: type, todo: true);
+    final reviews = await ReviewDao().getAllReviews(filter: filter);
     await store.dispatch(LoadedReviewsAction(reviews..shuffle()));
   };
 }

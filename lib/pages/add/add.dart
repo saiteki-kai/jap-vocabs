@@ -7,6 +7,7 @@ import 'package:jap_vocab/models/item.dart';
 import 'package:jap_vocab/pages/add/components/field_title.dart';
 import 'package:jap_vocab/redux/state/app_state.dart';
 import 'package:jap_vocab/redux/thunk/items.dart';
+import 'package:jap_vocab/utils/styles.dart';
 
 class AddPage extends StatefulWidget {
   final Item item;
@@ -106,9 +107,10 @@ class _AddPageState extends State<AddPage> {
       appBar: AppBar(
         title: Text(
           widget.item == null
-              ? S.of(context).title_add
-              : S.of(context).title_edit,
+              ? S.of(context).title_add.toUpperCase()
+              : S.of(context).title_edit.toUpperCase(),
         ),
+        centerTitle: true,
         titleSpacing: 0.0,
         actions: [
           IconButton(
@@ -116,6 +118,7 @@ class _AddPageState extends State<AddPage> {
             onPressed: _onSave,
           ),
         ],
+        elevation: 0,
       ),
       body: Form(
         key: _formKey,
@@ -160,21 +163,15 @@ class _AddPageState extends State<AddPage> {
                 ),
                 ChipsChoice<int>.single(
                   value: _jlpt,
-                  isWrapped: true,
+                  wrapped: true,
                   padding: EdgeInsets.zero,
-                  itemConfig: ChipsChoiceItemConfig(
-                    showCheckmark: false,
-                    selectedBrightness: Brightness.dark,
-                    unselectedBrightness: Brightness.dark,
-                    selectedColor: Theme.of(context).accentColor,
-                    unselectedColor: Colors.grey.shade400,
-                  ),
-                  options: [
-                    ChipsChoiceOption(value: 5, label: 'N5'),
-                    ChipsChoiceOption(value: 4, label: 'N4'),
-                    ChipsChoiceOption(value: 3, label: 'N3'),
-                    ChipsChoiceOption(value: 2, label: 'N2'),
-                    ChipsChoiceOption(value: 1, label: 'N1'),
+                  choiceStyle: Style.chipTheme,
+                  choiceItems: [
+                    C2Choice(value: 5, label: 'N5'),
+                    C2Choice(value: 4, label: 'N4'),
+                    C2Choice(value: 3, label: 'N3'),
+                    C2Choice(value: 2, label: 'N2'),
+                    C2Choice(value: 1, label: 'N1'),
                   ],
                   onChanged: (int value) {
                     setState(() => _jlpt = value);
@@ -186,21 +183,15 @@ class _AddPageState extends State<AddPage> {
                 ),
                 ChipsChoice<String>.single(
                   value: _type,
-                  isWrapped: true,
+                  wrapped: true,
                   padding: EdgeInsets.zero,
-                  itemConfig: ChipsChoiceItemConfig(
-                    showCheckmark: false,
-                    selectedBrightness: Brightness.dark,
-                    unselectedBrightness: Brightness.dark,
-                    selectedColor: Theme.of(context).accentColor,
-                    unselectedColor: Colors.grey.shade400,
-                  ),
-                  options: [
-                    ChipsChoiceOption(
+                  choiceStyle: Style.chipTheme,
+                  choiceItems: [
+                    C2Choice(
                       value: 'word',
                       label: S.of(context).tab_word,
                     ),
-                    ChipsChoiceOption(
+                    C2Choice(
                       value: 'kanji',
                       label: S.of(context).tab_kanji,
                     ),

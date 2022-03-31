@@ -42,11 +42,15 @@ ThunkAction<AppState> addItem(Item item) {
     var reviewId1 = uuid.v1();
     var reviewId2 = uuid.v1();
 
+    final now = DateTime.now();
+
     await store.dispatch(
       addReview(Review(
         id: reviewId1,
         itemId: itemId,
         type: item.type,
+        next: now,
+        last: now,
         reviewType: 'meaning',
       )),
     );
@@ -57,6 +61,8 @@ ThunkAction<AppState> addItem(Item item) {
         id: reviewId2,
         itemId: itemId,
         type: item.type,
+        next: now,
+        last: now,
         reviewType: item.type == 'kanji' ? 'writing' : 'reading',
       )),
     );

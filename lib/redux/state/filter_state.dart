@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 class FilterState {
   final String type;
   final String search;
+  final bool showFavorite;
 
   final List<int> jlpt;
   final List<String> level;
@@ -12,6 +13,7 @@ class FilterState {
   const FilterState({
     @required this.type,
     this.search,
+    this.showFavorite,
     this.jlpt,
     this.level,
     this.partOfSpeech,
@@ -20,6 +22,7 @@ class FilterState {
   FilterState.initial()
       : type = 'word',
         search = null,
+        showFavorite = false,
         jlpt = null,
         level = null,
         partOfSpeech = null;
@@ -27,6 +30,7 @@ class FilterState {
   FilterState copyWith({
     String type,
     String search,
+    bool showFavorite,
     List<int> jlpt,
     List<String> level,
     List<String> partOfSpeech,
@@ -34,6 +38,7 @@ class FilterState {
     return FilterState(
       type: type ?? this.type,
       search: search ?? this.search,
+      showFavorite: showFavorite ?? this.showFavorite,
       jlpt: jlpt ?? this.jlpt,
       level: level ?? this.level,
       partOfSpeech: partOfSpeech ?? this.partOfSpeech,
@@ -46,6 +51,7 @@ class FilterState {
       other is FilterState &&
           type == other.type &&
           search == other.search &&
+          showFavorite == other.showFavorite &&
           jlpt == other.jlpt &&
           level == other.level &&
           partOfSpeech == other.partOfSpeech;
@@ -54,6 +60,7 @@ class FilterState {
   int get hashCode =>
       type.hashCode ^
       search.hashCode ^
+      showFavorite.hashCode ^
       jlpt.hashCode ^
       level.hashCode ^
       partOfSpeech.hashCode;

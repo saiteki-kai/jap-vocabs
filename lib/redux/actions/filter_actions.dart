@@ -22,3 +22,8 @@ class ChangePartOfSpeechAction {
   final List<String> partOfSpeech;
   const ChangePartOfSpeechAction(this.partOfSpeech);
 }
+
+class ShowFavoriteAction {
+  final bool favorite;
+  const ShowFavoriteAction(this.favorite);
+}

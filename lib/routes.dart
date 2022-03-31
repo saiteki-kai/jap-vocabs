@@ -4,9 +4,9 @@ import 'package:jap_vocab/models/answer.dart';
 import 'package:jap_vocab/models/item.dart';
 import 'package:jap_vocab/models/review.dart';
 import 'package:jap_vocab/pages/add/add.dart';
+import 'package:jap_vocab/pages/app.dart';
 import 'package:jap_vocab/pages/details/details.dart';
 import 'package:jap_vocab/pages/favorites/favorites.dart';
-import 'package:jap_vocab/pages/home/home.dart';
 import 'package:jap_vocab/pages/reviews/reviews.dart';
 import 'package:jap_vocab/pages/settings/settings.dart';
 import 'package:jap_vocab/pages/summary/summary.dart';
@@ -16,7 +16,7 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
 
   switch (settings.name) {
     case '/':
-      return MaterialPageRoute(builder: (_) => HomePage());
+      return MaterialPageRoute(builder: (_) => LayoutPage());
     case '/add':
       return MaterialPageRoute(builder: (_) => AddPage());
     case '/edit':

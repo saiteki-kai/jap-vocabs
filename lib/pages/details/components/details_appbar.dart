@@ -34,6 +34,7 @@ class DetailsAppBar extends StatelessWidget {
             overflow: TextOverflow.ellipsis,
           ),
           titleSpacing: 0.0,
+          elevation: 0,
           actions: [
             IconButton(
               icon: Icon(
@@ -85,12 +86,12 @@ class DetailsAppBar extends StatelessWidget {
           ],
           bottom: TabBar(
             controller: controller,
-            unselectedLabelColor: Colors.white30,
+            unselectedLabelColor: Colors.white38,
             labelColor: Colors.white,
             indicatorSize: TabBarIndicatorSize.label,
             indicator: MD2Indicator(
               indicatorHeight: 4.0,
-              indicatorColor: Colors.white,
+              indicatorColor: Theme.of(context).canvasColor,
               horizontalPadding: 16.0,
             ),
             onTap: onTabChange,

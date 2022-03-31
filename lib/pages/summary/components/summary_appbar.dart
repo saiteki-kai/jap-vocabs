@@ -15,6 +15,7 @@ class SummaryAppBar extends StatelessWidget {
     return AppBar(
       title: Text(S.of(context).tooltip_summary),
       titleSpacing: 0.0,
+      elevation: 0,
       bottom: PreferredSize(
         preferredSize: Size.fromHeight(100.0),
         child: Padding(

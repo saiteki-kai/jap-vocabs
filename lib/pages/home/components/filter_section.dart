@@ -4,104 +4,133 @@ import 'package:flutter_redux/flutter_redux.dart';
 import 'package:jap_vocab/generated/l10n.dart';
 import 'package:jap_vocab/redux/state/app_state.dart';
 import 'package:jap_vocab/redux/thunk/filter.dart';
+import 'package:jap_vocab/utils/styles.dart';
 import 'package:redux/redux.dart';
 
 class FilterSection extends StatelessWidget {
+  const FilterSection({Key key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    final _chipConfig = ChipsChoiceItemConfig(
-      showCheckmark: false,
-      unselectedBrightness: Brightness.dark,
-      selectedBrightness: Brightness.dark,
-      selectedColor: Theme.of(context).accentColor,
-      margin: EdgeInsets.zero,
-      spacing: 8.0,
-      labelStyle: Theme.of(context).textTheme.caption,
+    final theme = Theme.of(context);
+
+    final _style = theme.textTheme.subtitle1.copyWith(
+      color: Colors.white,
     );
 
-    final _style = Theme.of(context).textTheme.subtitle1;
+    final _padding = const EdgeInsets.symmetric(vertical: 0, horizontal: 12.0);
 
-    // TODO: add select all / deselect all button
+    // TODO: hide partOfSpeech when kanji is selected
+
     return StoreConnector(
       distinct: true,
       converter: (Store<AppState> store) => _ViewModel.create(store),
       builder: (context, _ViewModel vm) {
         return Container(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.only(top: 8.0),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text('JLPT', style: _style),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: Text('JLPT', style: _style),
+              ),
               ChipsChoice<int>.multiple(
                 value: vm.jlpt,
-                options: [
-                  ChipsChoiceOption(value: 5, label: 'N5'),
-                  ChipsChoiceOption(value: 4, label: 'N4'),
-                  ChipsChoiceOption(value: 3, label: 'N3'),
-                  ChipsChoiceOption(value: 2, label: 'N2'),
-                  ChipsChoiceOption(value: 1, label: 'N1'),
+                choiceItems: [
+                  C2Choice(value: 5, label: 'N5'),
+                  C2Choice(value: 4, label: 'N4'),
+                  C2Choice(value: 3, label: 'N3'),
+                  C2Choice(value: 2, label: 'N2'),
+                  C2Choice(value: 1, label: 'N1'),
                 ],
                 onChanged: (value) => vm.setJLPT(value),
-                itemConfig: _chipConfig,
-                padding: EdgeInsets.zero,
-                isWrapped: true,
+                choiceStyle: Style.chipTheme,
+                wrapped: true,
+                spacing: 0,
+                padding: _padding,
               ),
-              Text(S.of(context).item_level, style: _style),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: Text(S.of(context).item_level, style: _style),
+              ),
               ChipsChoice<String>.multiple(
                 value: vm.level,
-                options: [
-                  ChipsChoiceOption(value: 'weak', label: 'Weak'),
-                  ChipsChoiceOption(value: 'medium', label: 'Medium'),
-                  ChipsChoiceOption(value: 'strong', label: 'Strong'),
+                choiceItems: [
+                  C2Choice(value: 'weak', label: 'weak'),
+                  C2Choice(value: 'medium', label: 'medium'),
+                  C2Choice(value: 'strong', label: 'strong'),
                 ],
                 onChanged: (value) => vm.setLevel(value),
-                itemConfig: _chipConfig,
-                padding: EdgeInsets.zero,
-                isWrapped: true,
+                choiceStyle: Style.chipTheme,
+                wrapped: true,
+                spacing: 0,
+                padding: _padding,
               ),
-              Text(S.of(context).item_partofspeech, style: _style),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: Text(S.of(context).item_partofspeech, style: _style),
+              ),
               ChipsChoice<String>.multiple(
                 value: vm.partOfSpeech,
-                options: [
-                  ChipsChoiceOption(
+                choiceItems: [
+                  C2Choice(
                     value: 'avverbio',
                     label: 'avverbio',
                   ),
-                  ChipsChoiceOption(
+                  C2Choice(
                     value: 'aggettivo-no',
                     label: 'aggettivo-no',
                   ),
-                  ChipsChoiceOption(
+                  C2Choice(
                     value: 'aggettivo-na',
                     label: 'aggettivo-na',
                   ),
-                  ChipsChoiceOption(
+                  C2Choice(
                     value: 'verbo',
                     label: 'verbo',
                   ),
-                  ChipsChoiceOption(
+                  C2Choice(
                     value: 'verbo-transitivo',
                     label: 'verbo transitivo',
                   ),
-                  ChipsChoiceOption(
+                  C2Choice(
                     value: 'verbo-intransitivo',
                     label: 'verbo intransitivo',
                   ),
-                  ChipsChoiceOption(
+                  C2Choice(
                     value: 'verbo-suru',
                     label: 'verbo suru',
                   ),
-                  ChipsChoiceOption(
+                  C2Choice(
                     value: 'sostantivo',
                     label: 'sostantivo',
                   ),
                 ],
                 onChanged: (value) => vm.setPartOfSpeech(value),
-                itemConfig: _chipConfig,
-                padding: EdgeInsets.zero,
-                isWrapped: true,
+                choiceStyle: Style.chipTheme,
+                wrapped: false,
+                padding: _padding,
+              ),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                child: InkWell(
+                  borderRadius: BorderRadius.circular(8.0),
+                  onTap: () async {
+                    await vm.setPartOfSpeech([]);
+                    await vm.setLevel([]);
+                    await vm.setJLPT([]);
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      'Reset',
+                      style:
+                          theme.textTheme.button.copyWith(color: Colors.white),
+                    ),
+                  ),
+                ),
               ),
             ],
           ),

@@ -16,16 +16,37 @@ class FavoritesPage extends StatelessWidget {
       onInitialBuild: (_ViewModel vm) => vm.getFavorites(),
       builder: (context, _ViewModel vm) {
         return CustomLayout(
-          appBar: AppBar(
+          /*appBar: AppBar(
             title: Text(S.of(context).title_favorites),
             titleSpacing: 0.0,
-          ),
-          body: ListView.builder(
-            padding: EdgeInsets.zero,
-            itemCount: vm.favorites?.length ?? 0,
-            itemBuilder: (context, index) {
-              return ListItem(item: vm.favorites[index]);
-            },
+          ),*/
+          /*appBar: AppBar(
+            backgroundColor: Theme.of(context).canvasColor,
+            elevation: 0,
+          ),*/
+          body: Stack(
+            alignment: Alignment.topCenter,
+            fit: StackFit.expand,
+            children: [
+              /*  Container(
+                color: Colors.black.withAlpha(10),
+                padding: const EdgeInsets.all(32.0),
+                child: Text(
+                  S.of(context).title_favorites,
+                  style: Theme.of(context).textTheme.headline4.copyWith(
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).primaryColor,
+                      ),
+                ),
+              ), */
+              ListView.builder(
+                padding: EdgeInsets.zero,
+                itemCount: vm.favorites?.length ?? 0,
+                itemBuilder: (context, index) {
+                  return ListItem(item: vm.favorites[index]);
+                },
+              ),
+            ],
           ),
         );
       },

@@ -6,6 +6,8 @@ import 'package:jap_vocab/redux/thunk/filter.dart';
 import 'package:redux/redux.dart';
 
 class ReviewTypeSwitch extends StatelessWidget {
+  const ReviewTypeSwitch({Key key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return StoreConnector(
@@ -13,6 +15,7 @@ class ReviewTypeSwitch extends StatelessWidget {
       converter: (Store<AppState> store) => _ViewModel.create(store),
       builder: (context, _ViewModel vm) {
         return Row(
+          mainAxisSize: MainAxisSize.min,
           children: [
             TypeButton(
               text: '語彙',

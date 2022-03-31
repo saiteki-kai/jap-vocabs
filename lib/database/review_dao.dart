@@ -1,8 +1,11 @@
-import 'package:flutter/foundation.dart';
+import 'dart:math';
+
 import 'package:jap_vocab/models/review.dart';
 import 'package:jap_vocab/database/app_database.dart';
 import 'package:sembast/sembast.dart';
 import 'package:sembast/timestamp.dart';
+
+enum ReviewsFilter { ALL, NEXT, NOW }
 
 class ReviewDao {
   Future<Database> get _db async => await AppDatabase.instance.database;
@@ -33,23 +36,15 @@ class ReviewDao {
     await _store.delete(await _db, finder: finder);
   }
 
-  Future<List<Review>> getAllReviews({
-    bool todo = false,
-    @required String type,
-  }) async {
-    var finder = Finder(filter: Filter.equals('type', type));
+  Future<List<Review>> getAllReviews({filter = ReviewsFilter.NEXT}) async {
+    var finder;
 
-    if (todo) {
+    if (filter == ReviewsFilter.NOW) {
       finder = Finder(
-        filter: Filter.and(
+        filter: Filter.or(
           [
-            Filter.equals('type', type),
-            Filter.or(
-              [
-                Filter.equals('next', null),
-                Filter.lessThan('next', Timestamp.now()),
-              ],
-            ),
+            Filter.equals('next', null),
+            Filter.lessThan('next', Timestamp.now()),
           ],
         ),
       );
@@ -57,11 +52,31 @@ class ReviewDao {
 
     final recordSnapshot = await _store.find(await _db, finder: finder);
 
+    List<Review> reviews;
+
     if (recordSnapshot != null) {
-      return recordSnapshot.map((snapshot) {
+      reviews = recordSnapshot.map((snapshot) {
         return Review.fromMap(snapshot.value);
       }).toList();
     }
-    return null;
+
+    if (filter == ReviewsFilter.NEXT && reviews.isNotEmpty) {
+      var timestamps = reviews
+          .map((e) => e.next?.millisecondsSinceEpoch ?? 8640000000000000000)
+          .toList();
+      var last = timestamps.reduce(min);
+
+      reviews = reviews.where((r) {
+        if (r.next == null) return false;
+        final millis = DateTime.now().millisecondsSinceEpoch;
+
+        return r.next.millisecondsSinceEpoch == last ||
+            r.next.millisecondsSinceEpoch <= millis;
+      }).toList();
+    }
+
+    print(reviews);
+
+    return reviews;
   }
 }

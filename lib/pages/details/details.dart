@@ -101,9 +101,9 @@ class _DetailsPageState extends State<DetailsPage>
           floatingActionButton: ScaleTransition(
             scale: _animationController,
             child: FloatingActionButton(
-              shape: RoundedRectangleBorder(
+              /*shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(8.0)),
-              ),
+              ),*/
               child: Icon(Icons.add, color: Colors.white),
               onPressed: () {
                 _openDialog(context);

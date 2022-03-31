@@ -56,6 +56,7 @@ class BackupSection extends StatelessWidget {
             buttonText: S.of(context).button_restore,
           );
         });
+        // TODO: reload data in the redux store !!!!!!!
       }
 
       return info;
@@ -101,7 +102,7 @@ class BackupSection extends StatelessWidget {
           subtitle: Text(S.of(context).settings_restorebackup_descr),
           onTap: () => _restoreBackup(context),
         ),
-        Divider(height: 0),
+        Divider(height: 0, indent: 16.0, endIndent: 16.0),
         Padding(
           padding: const EdgeInsets.all(16.0),
           child: Text(

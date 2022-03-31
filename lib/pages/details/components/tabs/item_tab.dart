@@ -16,62 +16,70 @@ class WordTab extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Container(
-          color: Theme.of(context).primaryColorLight,
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    item.text,
-                    style: Theme.of(context).textTheme.headline4.copyWith(
-                          color: Colors.black87,
-                        ),
-                  ),
-                  if (item.jlpt != null)
-                    Text('N${item.jlpt}',
-                        style: Theme.of(context).textTheme.subtitle1),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(16.0, 20.0, 16.0, 0.0),
+          child: Container(
+            decoration: BoxDecoration(
+                color: Colors.white,
+                boxShadow: <BoxShadow>[
+                  BoxShadow(blurRadius: 4, color: Colors.black.withAlpha(40))
                 ],
-              ),
-              ItemInfo(
-                title: item.type == 'kanji'
-                    ? S.of(context).item_writing
-                    : S.of(context).item_reading,
-                subtitle: item.type == 'kanji'
-                    ? Container(
-                        margin: const EdgeInsets.only(top: 8.0),
-                        color: Colors.white,
-                        child: SingleChildScrollView(
-                          scrollDirection: Axis.horizontal,
-                          child: SvgPicture.asset(
-                            'assets/kanji/${_hex}_frames.svg',
-                            height: 64.0,
+                borderRadius: BorderRadius.circular(20)),
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      item.text,
+                      style: Theme.of(context).textTheme.headline4.copyWith(
+                            color: Colors.black87,
                           ),
-                        ),
-                      )
-                    : Text(
-                        item.reading,
-                        style: TextStyle(fontSize: 16.0),
-                      ),
-              ),
-              ItemInfo(
-                title: S.of(context).item_meaning,
-                subtitle: item.meaning,
-              ),
-              if (_isWord)
-                ItemInfo(
-                  title: S.of(context).item_partofspeech,
-                  subtitle: item.partOfSpeech ?? '-',
-                )
-              else
-                ItemInfo(
-                  title: S.of(context).item_numberofstrokes,
-                  subtitle: item.numberOfStrokes?.toString() ?? '-',
+                    ),
+                    if (item.jlpt != null)
+                      Text('N${item.jlpt}',
+                          style: Theme.of(context).textTheme.subtitle1),
+                  ],
                 ),
-            ],
+                ItemInfo(
+                  title: item.type == 'kanji'
+                      ? S.of(context).item_writing
+                      : S.of(context).item_reading,
+                  subtitle: item.type == 'kanji'
+                      ? Container(
+                          margin: const EdgeInsets.only(top: 8.0),
+                          color: Colors.white,
+                          child: SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            child: SvgPicture.asset(
+                              'assets/kanji/${_hex}_frames.svg',
+                              height: 64.0,
+                            ),
+                          ),
+                        )
+                      : Text(
+                          item.reading,
+                          style: TextStyle(fontSize: 16.0),
+                        ),
+                ),
+                ItemInfo(
+                  title: S.of(context).item_meaning,
+                  subtitle: item.meaning,
+                ),
+                if (_isWord)
+                  ItemInfo(
+                    title: S.of(context).item_partofspeech,
+                    subtitle: item.partOfSpeech ?? '-',
+                  )
+                else
+                  ItemInfo(
+                    title: S.of(context).item_numberofstrokes,
+                    subtitle: item.numberOfStrokes?.toString() ?? '-',
+                  ),
+              ],
+            ),
           ),
         ),
         Expanded(

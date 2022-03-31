@@ -1,3 +1,4 @@
+import 'package:chips_choice/chips_choice.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -66,5 +67,14 @@ class Style {
       fontWeight: FontWeight.w400,
       letterSpacing: 1.5,
     ),
+  );
+
+  static C2ChoiceStyle chipTheme = C2ChoiceStyle(
+    color: Colors.indigo[400],
+    borderColor: Colors.indigo[400],
+    brightness: Brightness.dark,
+    borderRadius: BorderRadius.circular(8.0),
+    margin: const EdgeInsets.only(left: 4.0, right: 4.0, bottom: 8.0),
+    labelStyle: textTheme.bodyText2.copyWith(color: Colors.white),
   );
 }

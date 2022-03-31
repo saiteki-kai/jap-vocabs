@@ -6,6 +6,9 @@ import 'package:jap_vocab/redux/thunk/filter.dart';
 import 'package:redux/redux.dart';
 
 class SearchBar extends StatefulWidget with PreferredSizeWidget {
+  final Function onTap;
+  const SearchBar({Key key, this.onTap}) : super(key: key);
+
   @override
   _SearchBarState createState() => _SearchBarState();
 
@@ -15,12 +18,14 @@ class SearchBar extends StatefulWidget with PreferredSizeWidget {
 
 class _SearchBarState extends State<SearchBar> {
   TextEditingController _controller;
-  FocusNode _focus;
+  final _focus = FocusNode();
 
   @override
   void initState() {
     _controller = TextEditingController();
-    _focus = FocusNode();
+    _focus.addListener(() {
+      if (_focus.hasFocus) _controller.clear();
+    });
     super.initState();
   }
 
@@ -47,6 +52,7 @@ class _SearchBarState extends State<SearchBar> {
             onChanged: (String value) async => await vm.setSearch(value),
             controller: _controller,
             focusNode: _focus,
+            onTap: widget.onTap,
             textInputAction: TextInputAction.search,
             autofocus: false,
             style: TextStyle(
@@ -56,7 +62,7 @@ class _SearchBarState extends State<SearchBar> {
             cursorRadius: const Radius.circular(8.0),
             decoration: InputDecoration(
               isCollapsed: true,
-              fillColor: Colors.black.withOpacity(0.1),
+              fillColor: Colors.black.withOpacity(0.2),
               prefixIcon: Icon(Icons.search, color: Colors.white70),
               prefixIconConstraints: BoxConstraints.tight(Size(48.0, 40.0)),
               hintText: S.of(context).search_placeholder,
@@ -69,11 +75,11 @@ class _SearchBarState extends State<SearchBar> {
           IconButton(
             icon: Icon(Icons.close_rounded, color: Colors.white70),
             onPressed: () async {
-              _focus.unfocus();
-              _controller.clear();
+              _focus?.unfocus();
+              _controller?.clear();
               await vm.resetSearch();
             },
-          )
+          ),
         ],
       ),
     );

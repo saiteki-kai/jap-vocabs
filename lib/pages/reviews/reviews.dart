@@ -13,6 +13,7 @@ import 'package:jap_vocab/pages/reviews/components/reviews_appbar.dart';
 import 'package:jap_vocab/database/item_dao.dart';
 import 'package:jap_vocab/redux/state/app_state.dart';
 import 'package:jap_vocab/redux/thunk/reviews.dart';
+import 'package:jap_vocab/utils/styles.dart';
 import 'package:redux/redux.dart';
 
 class ReviewPage extends StatefulWidget {
@@ -26,19 +27,28 @@ class ReviewPage extends StatefulWidget {
 // TODO: Refactoring
 class _ReviewPageState extends State<ReviewPage> {
   var _show = false;
+  var _showHint = false;
   var _index = 0;
   var _quality = -1;
 
   final _answers = <Answer>[];
 
+  // TODO: fare in modo che passo le reviews aggiornate e con ReviewsFilter.ALL
+  // TODO: gestire le answer con lo store??? potrebbe andare...
   Future<void> _onNext(
       BuildContext context, Item item, Review review, int total) async {
-    final store = StoreProvider.of<AppState>(context);
+    final store = StoreProvider.of<AppState>(context, listen: false);
 
     final r = SM2.newIteration(review, _quality);
     await store.dispatch(updateReview(r));
 
-    _answers.add(Answer(review: review, correct: _quality > 2, item: item));
+    _answers.add(
+      Answer(
+        review: r,
+        correct: _quality > 2,
+        item: item,
+      ),
+    );
 
     if (_index + 1 < total) {
       setState(() {
@@ -85,9 +95,13 @@ class _ReviewPageState extends State<ReviewPage> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    final width = MediaQuery.of(context).size.width;
+  void initState() {
+    super.initState();
+    _showHint = false;
+  }
 
+  @override
+  Widget build(BuildContext context) {
     final total = widget.reviews.length;
     final review = widget.reviews[_index];
 
@@ -123,104 +137,155 @@ class _ReviewPageState extends State<ReviewPage> {
                 final item = snapshot.data;
                 final hex = item.text.codeUnits.first;
 
+                final response = review.reviewType == 'meaning'
+                    ? item.meaning
+                    : item.reading;
+
+                final examples = item.examples; // ..shuffle()
+                final hint = examples.isNotEmpty ? examples.first.text : '';
+
                 return Column(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Spacer(),
                     Container(
                       padding: EdgeInsets.only(top: 64.0),
-                      child: Column(
-                        children: [
-                          Text(
-                            item.text,
-                            style: Theme.of(context).textTheme.headline4,
-                          ),
-                          SizedBox(height: 16.0),
-                          Text(
-                            reviewType(context, review.reviewType)
-                                .toUpperCase(),
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20.0,
-                            ),
-                          ),
-                          SizedBox(height: 32.0),
-                          Card(
-                            elevation: 2.0,
-                            child: InkWell(
-                              child: Container(
-                                padding: const EdgeInsets.all(16.0),
-                                child: Text(S.of(context).button_show),
-                              ),
-                              onTap: () {
-                                setState(() => _show = !_show);
-                              },
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(8.0),
-                              ),
-                            ),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(8.0),
-                              ),
-                            ),
-                          ),
-                          SizedBox(height: 32.0),
-                          Container(
-                            height: 100,
-                            child: _show
-                                ? Padding(
-                                    padding: EdgeInsets.only(bottom: 16.0),
-                                    child: review.reviewType == 'writing'
-                                        ? SingleChildScrollView(
-                                            child: SvgPicture.asset(
-                                              'assets/kanji/${hex}_frames.svg',
-                                              height: 100,
-                                              fit: BoxFit.fitHeight,
-                                            ),
-                                            scrollDirection: Axis.horizontal,
-                                          )
-                                        : Text(
-                                            review.reviewType == 'meaning'
-                                                ? item.meaning
-                                                : item.reading,
+                      child: Card(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(16),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: Column(
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  InkResponse(
+                                    onTap: hint.isEmpty
+                                        ? null
+                                        : () {
+                                            setState(() => _showHint = true);
+                                          },
+                                    radius: 40,
+                                    child: Container(
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: 8.0,
+                                      ),
+                                      child: Row(
+                                        children: [
+                                          Icon(Icons.lightbulb,
+                                              color: hint.isEmpty
+                                                  ? Colors.black45
+                                                  : null),
+                                          SizedBox(width: 4),
+                                          Text(
+                                            'Hint',
                                             style: Theme.of(context)
                                                 .textTheme
-                                                .subtitle1
-                                                .copyWith(fontSize: 20.0),
+                                                .button
+                                                .copyWith(
+                                                    color: hint.isEmpty
+                                                        ? Colors.black45
+                                                        : null),
                                           ),
-                                  )
-                                : null,
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 8.0,
+                                      vertical: 4.0,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(8.0),
+                                      color: Theme.of(context)
+                                          .accentColor
+                                          .withOpacity(0.3),
+                                    ),
+                                    child: Text(
+                                      reviewType(context, review.reviewType)
+                                          .toUpperCase(),
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: Theme.of(context).accentColor,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 32.0),
+                                child: Text(
+                                  item.text,
+                                  style: Theme.of(context).textTheme.headline4,
+                                ),
+                              ),
+                              FlatButton(
+                                color: Colors.grey.shade200,
+                                child: Text(
+                                    S.of(context).button_show.toUpperCase()),
+                                onPressed: () {
+                                  setState(() {
+                                    _showHint = false;
+                                    _show = !_show;
+                                  });
+                                },
+                              ),
+                            ],
                           ),
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: Container(
+                        alignment: Alignment.center,
+                        child: _show || _showHint
+                            ? review.reviewType == 'writing'
+                                ? SingleChildScrollView(
+                                    child: SvgPicture.asset(
+                                      'assets/kanji/${hex}_frames.svg',
+                                      height: 100,
+                                      fit: BoxFit.fitHeight,
+                                    ),
+                                    scrollDirection: Axis.horizontal,
+                                  )
+                                : Text(
+                                    _showHint ? hint : response,
+                                    textAlign: TextAlign.center,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .subtitle1
+                                        .copyWith(fontSize: 22.0),
+                                  )
+                            : null,
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 16.0),
+                      child: ChipsChoice<int>.single(
+                        value: _quality,
+                        wrapped: true,
+                        padding: EdgeInsets.zero,
+                        choiceStyle: Style.chipTheme,
+                        choiceItems: [
+                          C2Choice(value: 0, label: '0'),
+                          C2Choice(value: 1, label: '1'),
+                          C2Choice(value: 2, label: '2'),
+                          C2Choice(value: 3, label: '3'),
+                          C2Choice(value: 4, label: '4'),
+                          C2Choice(value: 5, label: '5'),
                         ],
+                        onChanged: _show
+                            ? (val) => setState(() => _quality = val)
+                            : (_) => null,
                       ),
                     ),
-                    ChipsChoice<int>.single(
-                      value: _quality,
-                      isWrapped: true,
-                      padding: EdgeInsets.zero,
-                      itemConfig: ChipsChoiceItemConfig(
-                        showCheckmark: false,
-                        selectedBrightness: Brightness.dark,
-                        unselectedBrightness: Brightness.dark,
-                        unselectedColor: _show ? Colors.grey : null,
-                      ),
-                      options: [
-                        ChipsChoiceOption(value: 0, label: '0'),
-                        ChipsChoiceOption(value: 1, label: '1'),
-                        ChipsChoiceOption(value: 2, label: '2'),
-                        ChipsChoiceOption(value: 3, label: '3'),
-                        ChipsChoiceOption(value: 4, label: '4'),
-                        ChipsChoiceOption(value: 5, label: '5'),
-                      ],
-                      onChanged: _show
-                          ? (val) => setState(() => _quality = val)
-                          : (_) => null,
-                    ),
-                    Spacer(),
                     Container(
-                      width: width * 0.6,
                       child: RaisedButton(
                         child: Text(
                           _index == total - 1

@@ -25,6 +25,8 @@ void main() async {
   //await Notifications.instance.exampleNotification(store);
   //await Notifications.instance.reviewNotification(); // TODO: capire se spostare
 
+  //await SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.bottom]);
+
   runApp(App(store: store));
 }
 
@@ -61,14 +63,26 @@ class App extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             theme: ThemeData(
               // PALETTE: https://dribbble.com/shots/13626922-Bold-Mobile-app
-              primaryColorDark: Color(0xff4b3fc7),
-              primaryColor: Color(0xff4b3fc7),
+              primaryColorDark: Colors.indigo[800], //Color(0xff4b3fc7),
+              primaryColor:
+                  Colors.indigo[600], // Color(0xff4b3fc7), // Colors.grey[50]
               primaryColorLight: Color(0x118881d0),
-              accentColor: Color(0xffffa962),
-              accentColorBrightness: Brightness.dark,
+              accentColor:
+                  Colors.amber, // Color(0xffe30425), // Color(0xffffab4d),
+              accentColorBrightness: Brightness.light,
+              canvasColor: Color(0xfff4f4f4),
               backgroundColor: Colors.white,
               highlightColor: Colors.white10,
               textTheme: Style.textTheme,
+              buttonTheme: ButtonThemeData(
+                disabledColor: Colors.grey.shade400,
+                buttonColor: Theme.of(context).accentColor,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8.0),
+                ),
+                padding: const EdgeInsets.all(12.0),
+                minWidth: double.infinity,
+              ),
               inputDecorationTheme: InputDecorationTheme(
                 filled: true,
                 contentPadding: const EdgeInsets.all(8.0),

@@ -44,15 +44,17 @@ class Notifications {
         payload: 'examples');
   }
 
-  Future<void> reviewNotification(Remainder remainder,
-      {Function(List<Review>) cb}) async {
+  Future<void> reviewNotification(
+    Remainder remainder, {
+    Function(List<Review>) cb,
+  }) async {
     final time = remainder.time;
     final days = remainder.days;
     final enabled = remainder.enabled;
 
     if (!enabled) return;
 
-    final reviews = await ReviewDao().getAllReviews(type: 'word', todo: true);
+    final reviews = await ReviewDao().getAllReviews(filter: ReviewsFilter.NEXT);
     final count = reviews.length;
 
     final androidDetails = AndroidNotificationDetails(

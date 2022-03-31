@@ -16,6 +16,7 @@ class ReviewAppBar extends StatelessWidget {
     return AppBar(
       title: Text(S.of(context).reviews),
       titleSpacing: 0.0,
+      elevation: 0,
       actions: [
         IconButton(
           icon: Icon(Icons.pie_chart),

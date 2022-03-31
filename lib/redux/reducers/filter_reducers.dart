@@ -8,6 +8,7 @@ Reducer<FilterState> filterReducer = combineReducers<FilterState>([
   TypedReducer<FilterState, ChangeJLTPAction>(_changeJLPT),
   TypedReducer<FilterState, ChangeLevelAction>(_changeLevel),
   TypedReducer<FilterState, ChangePartOfSpeechAction>(_changePartOfSpeech),
+  TypedReducer<FilterState, ShowFavoriteAction>(_showFavorite),
 ]);
 
 FilterState _changeSearch(FilterState state, ChangeSearchAction action) {
@@ -31,4 +32,8 @@ FilterState _changePartOfSpeech(
   ChangePartOfSpeechAction action,
 ) {
   return state.copyWith(partOfSpeech: action.partOfSpeech);
+}
+
+FilterState _showFavorite(FilterState state, ShowFavoriteAction action) {
+  return state.copyWith(showFavorite: action.favorite);
 }
